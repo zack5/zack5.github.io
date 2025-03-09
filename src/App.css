@@ -126,13 +126,12 @@ nav {
 
 .project-logo {
   position: absolute;
-  right: 10px;
-  bottom: 0;
+  right: 13px;
+  bottom: 10px;
 }
 
 .project-logo > svg {
   width: 90px;
-  height: 90px;
 } 
 
 .project-logo > svg >path {

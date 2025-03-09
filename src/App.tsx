@@ -1,19 +1,22 @@
+import { HashRouter, Route, Routes } from 'react-router-dom'
+
 import './App.css'
 
-import About from './components/About'
-import Projects from './components/Projects'
-import Sidebar from './components/Sidebar'
+import Layout from './components/Layout'
+import Main from './components/Main'
+import XDefiant from './components/XDefiant'
 
 function App() {
 
   return (
-    <main>
-      <Sidebar />
-      <div className="content">
-        <About />
-        <Projects />
-      </div>
-    </main>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path="/xdefiant" element={<XDefiant />} />
+        </Route>
+      </Routes>
+    </HashRouter>
   )
 }
 

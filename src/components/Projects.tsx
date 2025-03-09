@@ -36,18 +36,6 @@ export default function Projects() {
           </a>
         ]}
       />
-      <h3>Board Games</h3>
-      <Project
-        name="Super Dark"
-        subtitle="2020-2023"
-        logo={<LogoSuperDark />}
-        description="Super Dark is a social deduction board game about dark money in politics. I supported all aspects of production across our five-person team, including design, playtesting, manufacturing, and fulfillment. Funded through a successful Kickstarter campaign that raised over $25,000."
-        links={[
-          <a href="https://www.kickstarter.com/projects/superdark/super-dark">
-            <button>Kickstarter</button>
-          </a>
-        ]}
-      />
       <h3>Web</h3>
       <Project
         name="Echoes of Wisdom UI Exploration"
@@ -73,6 +61,18 @@ export default function Projects() {
           <a href="https://github.com/zack5/passmapper">
             <button>Code</button>
           </a>,
+        ]}
+      />
+      <h3>Board Games</h3>
+      <Project
+        name="Super Dark"
+        subtitle="2020-2023"
+        logo={<LogoSuperDark />}
+        description="Super Dark is a social deduction board game about dark money in politics. I supported all aspects of production across our five-person team, including design, playtesting, manufacturing, and fulfillment. Funded through a successful Kickstarter campaign that raised over $25,000."
+        links={[
+          <a href="https://www.kickstarter.com/projects/superdark/super-dark">
+            <button>Kickstarter</button>
+          </a>
         ]}
       />
       <h3>Publications</h3>

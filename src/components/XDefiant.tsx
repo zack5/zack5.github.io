@@ -2,7 +2,6 @@ import battlepass from "../assets/xdefiant/battlepass.png";
 import challenges from "../assets/xdefiant/challenges.png";
 import gameplay from "../assets/xdefiant/gameplay.gif";
 import highFive from "../assets/xdefiant/highfive.gif";
-import lobby from "../assets/xdefiant/lobby.png";
 import mainMenu from "../assets/xdefiant/mainmenu.gif";
 import playMenu from "../assets/xdefiant/playmenu.gif";
 
@@ -26,7 +25,6 @@ export default function XDefiant() {
         <img src={highFive} alt="Animated celebration sequence showing players after a match" />
         <img src={battlepass} alt="Battle Pass purchase screen" />
         <img src={challenges} alt="Progression screen showing challenges to earn factions" />
-        <img src={lobby} alt="Pre-match lobby screen showing players and challenges" />
       </figure>
     </article>
   )

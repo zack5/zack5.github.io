@@ -78,6 +78,7 @@ p, span {
 
 .no-text-decoration {
   text-decoration: none !important;
+  color: var(--color-text);
 }
 
 .no-text-decoration:hover {

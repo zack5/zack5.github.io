@@ -163,7 +163,11 @@ nav {
 
 /* Portfolio */
 
-.portfolio > img {
+.portfolio-images {
+  margin: 0;
+}
+
+.portfolio-images > img {
   width: 100%;
   margin-block: 1rem;
 }

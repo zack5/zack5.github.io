@@ -5,21 +5,25 @@ import profileImage from '/zack-cinquini.jpg';
 
 export default function Sidebar() {
   return (
-    <div className="sidebar">
-      <Link to="/"><img src={profileImage} alt="Zack Cinquini" className="profile-image" /></Link>
-      <Link to="/" style={{ color: 'var(--color-text)', textDecoration: 'none' }}><h1>Zack Cinquini</h1></Link>
+    <aside className="sidebar" role="complementary" aria-label="Personal information">
+      <Link to="/">
+        <img src={profileImage} alt="Zack Cinquini" className="profile-image" />
+      </Link>
+      <Link to="/" className="no-text-decoration">
+        <h1>Zack Cinquini</h1>
+      </Link>
       <span>Software Engineer</span>
-      <div className="social-links">
-        <a href="mailto:isaac.cinquini@gmail.com">
-          <IoMail />
+      <div className="social-links" aria-label="Social media links">
+        <a href="mailto:isaac.cinquini@gmail.com" aria-label="Send email">
+          <IoMail aria-hidden="true" />
         </a>
-        <a href="https://www.linkedin.com/in/zackcinquini">
-          <IoLogoLinkedin />
+        <a href="https://www.linkedin.com/in/zackcinquini" aria-label="LinkedIn profile">
+          <IoLogoLinkedin aria-hidden="true" />
         </a>
-        <a href="https://github.com/zack5">
-          <IoLogoGithub />
+        <a href="https://github.com/zack5" aria-label="GitHub profile">
+          <IoLogoGithub aria-hidden="true" />
         </a>
       </div>
-    </div>
+    </aside>
   );
 }

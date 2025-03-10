@@ -16,7 +16,7 @@ export default function Projects() {
           name="XDefiant"
           subtitle="Ubisoft, 2020-2025"
           logo={<LogoXDefiant />}
-          description="Main point of contact for UI Engineering. Owned frontend state management, system to display 3D characters within menus, and UI for progression systems. First responder to urgent live UI issues. "
+          description="Main point of contact for UI Engineering. Owned frontend state management, system to display 3D characters within menus, and UI for progression systems. First responder to urgent live UI issues. Used C++ and Ubisoft's Snowdrop engine."
           links={[
             <Link to="/xdefiant" aria-label="View XDefiant portfolio">
               <button>Portfolio</button>
@@ -30,7 +30,7 @@ export default function Projects() {
           name="God of War: Ragnarok"
           subtitle="Santa Monica Studio, 2019"
           logo={<LogoRagnarok />}
-          description="Collaborated with designers and artists to implement HUD and menu elements."
+          description="Collaborated with designers and artists to implement HUD and menu elements. Used C++ and Lua."
           links={[
             <a href="https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa" aria-label="Watch God of War: Ragnarok gameplay">
               <button>Gameplay</button>

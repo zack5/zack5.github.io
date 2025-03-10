@@ -32,6 +32,9 @@ export default function Projects() {
           logo={<LogoRagnarok />}
           description="Collaborated with designers and artists to implement HUD and menu elements."
           links={[
+            <a href="https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa">
+              <button>Gameplay</button>
+            </a>,
             <a href="https://www.youtube.com/watch?v=g1wr0DfV73E">
               <button>Trailer</button>
             </a>

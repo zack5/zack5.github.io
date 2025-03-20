@@ -43,7 +43,7 @@ export default function Projects() {
         <h3 id="web-projects">Web</h3>
         <Project
           name="Echoes of Wisdom UI Exploration"
-          description="Prototyping and evaluating UI alternatives for The Legend of Zelds: Echoes of Wisdom. Made with TypeScript and React. "
+          description="Prototyping and evaluating UI alternatives for The Legend of Zelda: Echoes of Wisdom. Made with TypeScript and React. "
           subtitle="2025"
           links={[
             <a href="https://echoes-of-wisdom-ui.netlify.app/" aria-label="View Echoes of Wisdom UI Exploration demo">

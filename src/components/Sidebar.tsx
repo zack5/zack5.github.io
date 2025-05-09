@@ -12,7 +12,7 @@ export default function Sidebar() {
       <Link to="/" className="no-text-decoration">
         <h1>Zack Cinquini</h1>
       </Link>
-      <span>Software Engineer</span>
+      <span>Software Engineer<br/>Brooklyn, NY</span>
       <div className="social-links" aria-label="Social media links">
         <a href="mailto:isaac.cinquini@gmail.com" aria-label="Send email">
           <IoMail aria-hidden="true" />

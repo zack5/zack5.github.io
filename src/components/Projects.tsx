@@ -13,15 +13,20 @@ export default function Projects() {
       <div className="projects">
         <h3 id="digital-games">Digital Games</h3>
         <Project
+          name="Fortnite"
+          subtitle="Epic Games, 2025 - Present"
+          description="UI Engineer on the Fortnite Player Journey team."
+        />
+        <Project
           name="XDefiant"
-          subtitle="Ubisoft, 2020-2025"
+          subtitle="Ubisoft, 2020 - 2025"
           logo={<LogoXDefiant />}
           description="Main point of contact for UI Engineering. Owned frontend state management, system to display 3D characters within menus, and UI for progression systems. First responder to urgent live UI issues. Used C++ and Ubisoft's Snowdrop engine."
           links={[
-            <Link to="/xdefiant" aria-label="View XDefiant portfolio">
+            <Link key="portfolio" to="/xdefiant" aria-label="View XDefiant portfolio">
               <button>Portfolio</button>
             </Link>,
-            <a href="https://www.youtube.com/watch?v=NoNpmAzGyB8" aria-label="Watch XDefiant trailer">
+            <a key="trailer" href="https://www.youtube.com/watch?v=NoNpmAzGyB8" aria-label="Watch XDefiant trailer">
               <button>Trailer</button>
             </a>
           ]}
@@ -32,10 +37,10 @@ export default function Projects() {
           logo={<LogoRagnarok />}
           description="Collaborated with designers and artists to implement HUD and menu elements. Used C++ and Lua."
           links={[
-            <a href="https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa" aria-label="Watch God of War: Ragnarok gameplay">
+            <a key="gameplay" href="https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa" aria-label="Watch God of War: Ragnarok gameplay">
               <button>Gameplay</button>
             </a>,
-            <a href="https://www.youtube.com/watch?v=g1wr0DfV73E" aria-label="Watch God of War: Ragnarok trailer">
+            <a key="trailer" href="https://www.youtube.com/watch?v=g1wr0DfV73E" aria-label="Watch God of War: Ragnarok trailer">
               <button>Trailer</button>
             </a>
           ]}
@@ -46,10 +51,23 @@ export default function Projects() {
           description="Prototyping and evaluating UI alternatives for The Legend of Zelda: Echoes of Wisdom. Made with TypeScript and React. "
           subtitle="2025"
           links={[
-            <a href="https://echoes-of-wisdom-ui.netlify.app/" aria-label="View Echoes of Wisdom UI Exploration demo">
+            <a key="demo" href="https://echoes-of-wisdom-ui.netlify.app/" aria-label="View Echoes of Wisdom UI Exploration demo">
               <button>Demo</button>
             </a>,
-            <a href="https://github.com/zack5/echoes-of-wisdom-ui" aria-label="View Echoes of Wisdom UI Exploration source code">
+            <a key="code" href="https://github.com/zack5/echoes-of-wisdom-ui" aria-label="View Echoes of Wisdom UI Exploration source code">
+              <button>Code</button>
+            </a>,
+          ]}
+        />
+        <Project
+          name="LetterGrams"
+          description="Daily Bananagrams-like word game. Made with TypeScript and React. "
+          subtitle="2025"
+          links={[
+            <a key="demo" href="https://lettergrams.netlify.app/" aria-label="View LetterGrams demo">
+              <button>Demo</button>
+            </a>,
+            <a key="code" href="https://github.com/zack5/lettergrams" aria-label="View LetterGrams source code">
               <button>Code</button>
             </a>,
           ]}
@@ -59,10 +77,10 @@ export default function Projects() {
           description="Digital portfolio of my transit card collection. Made with TypeScript and React."
           subtitle="2025"
           links={[
-            <a href="https://passmapper.netlify.app/" aria-label="View PassMapper demo">
+            <a key="demo" href="https://passmapper.netlify.app/" aria-label="View PassMapper demo">
               <button>Demo</button>
             </a>,
-            <a href="https://github.com/zack5/passmapper" aria-label="View PassMapper source code">
+            <a key="code" href="https://github.com/zack5/passmapper" aria-label="View PassMapper source code">
               <button>Code</button>
             </a>,
           ]}
@@ -70,11 +88,11 @@ export default function Projects() {
         <h3 id="board-games">Board Games</h3>
         <Project
           name="Super Dark"
-          subtitle="2020-2023"
+          subtitle="2020 - 2023"
           logo={<LogoSuperDark />}
           description="Super Dark is a social deduction board game about dark money in politics. I supported all aspects of production across our five-person team, including design, playtesting, manufacturing, and fulfillment. Funded through a successful Kickstarter campaign that raised over $25,000."
           links={[
-            <a href="https://www.kickstarter.com/projects/superdark/super-dark" aria-label="View Super Dark Kickstarter campaign">
+            <a key="kickstarter" href="https://www.kickstarter.com/projects/superdark/super-dark" aria-label="View Super Dark Kickstarter campaign">
               <button>Kickstarter</button>
             </a>
           ]}
@@ -85,7 +103,7 @@ export default function Projects() {
           name="Visualizing DNA folding and transcription in embryogenesis at single-cell resolution"
           subtitle="Nature 2019"
           links={[
-            <a href="https://doi.org/10.1038/s41586-019-1035-4" aria-label="Read Boettiger Lab paper">
+            <a key="paper" href="https://doi.org/10.1038/s41586-019-1035-4" aria-label="Read Boettiger Lab paper">
               <button>Paper</button>
             </a>
           ]}

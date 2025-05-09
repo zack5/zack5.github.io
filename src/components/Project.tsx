@@ -13,7 +13,7 @@ export default function Project({ name, logo, description, subtitle, links }:
         {!!links && <nav className="project-links" aria-label="Project links">{links}</nav>}
       </div>
       {!!logo && <div className="project-logo" aria-hidden="true">
-        {logo}
+        {/* {logo} */}
       </div>}
     </article>
   );

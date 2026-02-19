@@ -16,6 +16,11 @@ export default function Projects() {
           name="Fortnite"
           subtitle="Epic Games, 2025 - Present"
           description="UI Engineer on the Fortnite Player Journey team."
+          links={[
+            <Link key="portfolio" to="/fortnite" aria-label="View Fortnite portfolio">
+              <button>Portfolio</button>
+            </Link>
+          ]}
         />
         <Project
           name="XDefiant"

@@ -168,6 +168,10 @@ nav {
 
 /* Portfolio */
 
+.portfolio-subheading {
+  margin-top: 1.2rem;
+}
+
 .portfolio-images {
   margin: 0;
 }

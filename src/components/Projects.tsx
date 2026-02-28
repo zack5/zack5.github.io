@@ -31,9 +31,6 @@ export default function Projects() {
             <Link key="portfolio" to="/xdefiant" aria-label="View XDefiant portfolio">
               <button>Portfolio</button>
             </Link>,
-            <a key="trailer" href="https://www.youtube.com/watch?v=NoNpmAzGyB8" aria-label="Watch XDefiant trailer">
-              <button>Trailer</button>
-            </a>
           ]}
         />
         <Project
@@ -45,12 +42,22 @@ export default function Projects() {
             <a key="gameplay" href="https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa" aria-label="Watch God of War: Ragnarok gameplay">
               <button>Gameplay</button>
             </a>,
-            <a key="trailer" href="https://www.youtube.com/watch?v=g1wr0DfV73E" aria-label="Watch God of War: Ragnarok trailer">
-              <button>Trailer</button>
-            </a>
           ]}
         />
         <h3 id="web-projects">Web</h3>
+        <Project
+          name="Personal Subway Arrivals Board"
+          description="I was tired of narrowly missing trains, so I designed an app to track subway arrivals in New York City to run on a Raspberry Pi in my apartment."
+          subtitle="2026"
+          links={[
+            <Link key="design" to="/mta-station-board-design" aria-label="View XDefiant portfolio">
+              <button>UI/UX Design Journey</button>
+            </Link>,
+            <a key="demo" href="https://mta-station-board.netlify.app/station/629" aria-label="View MTA Station Board demo">
+              <button>Demo</button>
+            </a>,
+          ]}
+        />
         <Project
           name="Echoes of Wisdom UI Exploration"
           description="Prototyping and evaluating UI alternatives for The Legend of Zelda: Echoes of Wisdom. Made with TypeScript and React. "
@@ -58,9 +65,6 @@ export default function Projects() {
           links={[
             <a key="demo" href="https://echoes-of-wisdom-ui.netlify.app/" aria-label="View Echoes of Wisdom UI Exploration demo">
               <button>Demo</button>
-            </a>,
-            <a key="code" href="https://github.com/zack5/echoes-of-wisdom-ui" aria-label="View Echoes of Wisdom UI Exploration source code">
-              <button>Code</button>
             </a>,
           ]}
         />
@@ -72,9 +76,6 @@ export default function Projects() {
             <a key="demo" href="https://lettergrams.netlify.app/" aria-label="View LetterGrams demo">
               <button>Demo</button>
             </a>,
-            <a key="code" href="https://github.com/zack5/lettergrams" aria-label="View LetterGrams source code">
-              <button>Code</button>
-            </a>,
           ]}
         />
         <Project
@@ -84,9 +85,6 @@ export default function Projects() {
           links={[
             <a key="demo" href="https://passmapper.netlify.app/" aria-label="View PassMapper demo">
               <button>Demo</button>
-            </a>,
-            <a key="code" href="https://github.com/zack5/passmapper" aria-label="View PassMapper source code">
-              <button>Code</button>
             </a>,
           ]}
         />

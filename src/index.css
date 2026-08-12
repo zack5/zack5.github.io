@@ -1,6 +1,13 @@
+@font-face {
+  font-family: 'DrukWideBold';
+  src: url('./assets/fonts/DrukWideBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-family: Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1.3;
   font-weight: 400;
 
   font-synthesis: none;
@@ -8,16 +15,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --color-accent: #76b5ec;
-  --color-background: #242424;
-  --color-background-1: #2c2c2c;
-  --color-background-2: #464646;
+  color-scheme: dark;
+  --color-accent: #52106B;
+  --color-background: #131d3c;
+  --color-background-1: #111729;
+  --color-background-2: #111729;
   --color-svg: #6e6e6e;
-  --color-text: rgba(255, 255, 255, 0.87);
+  --color-header: rgba(255, 255, 255, 1);
+  --color-text: rgba(255, 255, 255, 0.65);
   --color-text-transparent: rgba(255, 255, 255, 0.1);
 
   color: var(--color-text);
-  background-color: var(--color-background);
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
 }
 
 a {
@@ -37,9 +50,33 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  margin-block: 0.5rem;
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-family: 'DrukWideBold';
+  color: var(--color-header);
+}
+
+h3 {
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-weight: 400;
+}
+
+p, span {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.35rem;
+  font-weight: 400;
 }
 
 button {

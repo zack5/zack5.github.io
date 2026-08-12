@@ -11,16 +11,19 @@ import XDefiant from './components/XDefiant'
 function App() {
 
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Main />} />
-          <Route path="/xdefiant" element={<XDefiant />} />
-          <Route path="/fortnite" element={<Fortnite />} />
-          <Route path="/mta-station-board-design" element={<MTAStationBoardDesign />} />
-        </Route>
-      </Routes>
-    </HashRouter>
+    <>
+      <div className="background"/>
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Main />} />
+            <Route path="/xdefiant" element={<XDefiant />} />
+            <Route path="/fortnite" element={<Fortnite />} />
+            <Route path="/mta-station-board-design" element={<MTAStationBoardDesign />} />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </>
   )
 }
 

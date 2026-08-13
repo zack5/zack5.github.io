@@ -1,9 +1,18 @@
 import { useEffect, useRef, useState } from "react";
+
+import { motion } from "framer-motion";
+
+import { IoPlay } from "react-icons/io5";
+
 import "./TableOfContents.css";
 
 export default function TableOfContents() {
     const [activeId, setActiveId] = useState<string | null>(null);
     const observerRef = useRef<IntersectionObserver | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const navRef = useRef<HTMLElement | null>(null);
+    const indicatorRef = useRef<HTMLDivElement | null>(null);
+    const [indicatorTop, setIndicatorTop] = useState(0);
 
     useEffect(() => {
         const sections = Array.from(document.querySelectorAll<HTMLElement>("section[data-toc-title]"));
@@ -42,6 +51,34 @@ export default function TableOfContents() {
         title: s.dataset.tocTitle || s.id,
     }));
 
+    useEffect(() => {
+        const update = () => {
+            const n = sections.length;
+            if (n === 0) return setIndicatorTop(0);
+
+            const parent = navRef.current ?? containerRef.current;
+            let parentHeight = parent ? parent.getBoundingClientRect().height : 0;
+
+            const indicatorEl = indicatorRef.current;
+            const indicatorHeight = indicatorEl ? indicatorEl.getBoundingClientRect().height : 0;
+
+            parentHeight = Math.max(0, parentHeight - indicatorHeight);
+
+            const index = Math.max(0, sections.findIndex((s) => s.id === activeId));
+
+            let top = 0;
+            if (n > 1) {
+                top = (parentHeight / (n - 1)) * index;
+            }
+
+            setIndicatorTop(top);
+        };
+
+        update();
+        window.addEventListener("resize", update);
+        return () => window.removeEventListener("resize", update);
+    }, [sections.length, activeId]);
+
     const handleClick = (e: React.MouseEvent, id?: string) => {
         e.preventDefault();
         const el = id ? document.getElementById(id) : null;
@@ -51,20 +88,36 @@ export default function TableOfContents() {
     if (!sections.length) return null;
 
     return (
-        <nav className="toc" aria-label="Table of contents">
-            <ul>
-                {sections.map((s) => (
-                    <li key={s.id}>
-                        <a
-                            href={`#${s.id}`}
-                            className={s.id === activeId ? "active" : ""}
-                            onClick={(e) => handleClick(e, s.id)}
+        <div className="toc-container" ref={containerRef}>
+            <motion.div
+                className="toc-indicator"
+                style={{ top: indicatorTop }}
+                animate={{ top: indicatorTop }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                ref={indicatorRef}
+            >
+                <IoPlay/>
+            </motion.div>
+            <nav className="toc" aria-label="Table of contents" ref={navRef}>
+                <ul>
+                    {sections.map((s) => (
+                        <motion.li 
+                            key={s.id}
+                            initial={{ x: 0 }}
+                            animate={{ x: s.id === activeId ? 2 : 0 }}
+                            transition={{ duration: 0.2, ease: "easeInOut" }}
                         >
-                            <h4>{s.title}</h4>
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        </nav>
+                            <a
+                                href={`#${s.id}`}
+                                className={s.id === activeId ? "active" : ""}
+                                onClick={(e) => handleClick(e, s.id)}
+                            >
+                                <h4>{s.title}</h4>
+                            </a>
+                        </motion.li>
+                    ))}
+                </ul>
+            </nav>
+        </div>
     );
 }

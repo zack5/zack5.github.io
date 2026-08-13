@@ -9,6 +9,7 @@ export default function Sidebar() {
         <Link to="/" className="no-text-decoration">
           <h1>ZACK<br />CINQUINI</h1>
         </Link>
+        <h5/>
         <span>I make organized and intuitive<br />user experiences.</span>
         <TableOfContents />
       </div>

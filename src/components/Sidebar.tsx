@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { IoLogoGithub, IoLogoLinkedin, IoMail } from 'react-icons/io5';
+import TableOfContents from './TableOfContents';
 
 export default function Sidebar() {
   return (
@@ -8,9 +9,8 @@ export default function Sidebar() {
         <Link to="/" className="no-text-decoration">
           <h1>ZACK<br />CINQUINI</h1>
         </Link>
-        <h2>Software Engineer</h2>
         <span>I make organized and intuitive<br />user experiences.</span>
-        <div className="table-of-contents"></div>
+        <TableOfContents />
       </div>
       <div className="social-links" aria-label="Social media links">
         <a href="https://www.linkedin.com/in/zackcinquini" aria-label="LinkedIn profile">

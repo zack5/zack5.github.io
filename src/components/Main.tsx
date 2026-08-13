@@ -8,12 +8,12 @@ import thumbnailSubwayArrivals from "../assets/project-thumbnails/subway-arrival
 export default function Main() {
   return (
     <>
-      <section className="about">
+      <section id="about" data-toc-title="About" className="about">
         <p>I'm a programmer who loves creating organized and intuitive user  experiences. Recently, I've been building interfaces for large-scale, multiplayer,  cross-platform video games.</p>
-        <p>Currently, I’m a UI Engineer at Epic Games on the Ecosystem Experience team. I lead engineering efforts to improve the Discovery system, partnering closely with designers and engineers to ensure something. Accessibility is built in from day one.</p>
+        <p>Currently, I’m a UI Engineer at Epic Games on the Ecosystem Experience team. I lead engineering efforts to improve the Discovery system, partnering closely with designers and engineers to ensure we craft the smoothest experience possible for players and developers authoring content within the Fortnite Ecosystem.</p>
         <p>In my spare time, you can usually find me hiking, singing, and finding new ways to have fun in old Pokemon games.</p>
       </section>
-      <section className="events">
+      <section id="experience" data-toc-title="Experience" className="events">
         <EventExperience
           title="Epic Games - UI Engineer"
           description="UI Engineer on the Fortnite Ecosystem Experience team."
@@ -35,8 +35,9 @@ export default function Main() {
           skills={["C++", "Lua"]}
           onClick={() => window.open("https://www.epicgames.com/fortnite/en-US/home", "_blank")}
         />
+        <a href="/Zack Cinquini 2025.pdf" aria-label="Download resume (PDF)">View Resume</a>
       </section>
-      <section className="events">
+      <section id="projects" data-toc-title="Projects" className="events">
         <EventProject
           title="Subway Arrivals Board"
           description="I was tired of narrowly missing trains, so I designed an app to track subway arrivals in New York City to run on a Raspberry Pi in my apartment."

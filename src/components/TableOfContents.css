@@ -1,0 +1,56 @@
+.toc {
+  margin-top: 1rem;
+}
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.toc li {
+  margin: 0.35rem 0;
+}
+.toc a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.toc a.active {
+  color: var(--color-header);
+  font-weight: 600;
+}
+
+@media (max-width: 800px) {
+  .toc {
+    display: none;
+  }
+}
+
+.toc-indicator {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(100, 255, 218, 0.25);
+  border-top: 1px dashed rgba(100,255,218,0.6);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.toc-controls {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted, #6b6b6b);
+}
+.toc-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.toc-controls input[type="range"] {
+  width: 100%;
+}
+.root-margin {
+  margin-top: 0.25rem;
+  font-family: monospace;
+  color: #8be9d4;
+}

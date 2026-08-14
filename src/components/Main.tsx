@@ -23,21 +23,21 @@ export default function Main() {
           description="UI Engineer on the Fortnite Ecosystem Experience team."
           duration="2025—Present"
           skills={["C++", "Unreal"]}
-          onClick={() => window.open("https://www.epicgames.com/fortnite/en-US/home", "_blank")}
+          to="Fortnite"
         />
         <EventExperience
           title="Ubisoft - UI Engineer"
           description={<p>Main point of contact for UI Engineering on <i>XDefiant</i>. Owned frontend state management, 3D characters within menus, and progression systems UI. First responder to live issues.</p>}
           duration="2020—2025"
           skills={["C++", "Snowdrop"]}
-          onClick={() => window.open("https://www.epicgames.com/fortnite/en-US/home", "_blank")}
+          to="XDefiant"
         />
         <EventExperience
           title="Santa Monica Studio - Intern"
           description={<p>Collaborated with designers and artists to implement HUD and menu elements for <i>God of War: Ragnarok</i>.</p>}
           duration="2019"
           skills={["C++", "Lua"]}
-          onClick={() => window.open("https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa", "_blank")}
+          href="https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa"
         />
         <a href="/Zack Cinquini 2025.pdf" aria-label="Download resume (PDF)" target="_blank" rel="noopener noreferrer">View Resume<GoArrowUpRight className="link-arrow"/></a>
       </section>
@@ -48,35 +48,35 @@ export default function Main() {
           description={<p><i>Super Dark</i> is a social deduction board game about dark money in politics. I supported all aspects of production across our five-person team, including design, playtesting, manufacturing, and fulfillment. Funded through a successful Kickstarter campaign that raised over $25,000.</p>}
           thumbnail={thumbnailSuperDark}
           skills={["Game Design", "Kickstarter", "Logistics"]}
-          onClick={() => window.open("https://www.kickstarter.com/projects/superdark/super-dark", "_blank")}
+          href="https://www.kickstarter.com/projects/superdark/super-dark"
         />
-      <EventProject
+        <EventProject
           title="Subway Arrivals Board"
           description="I was tired of narrowly missing trains, so I designed an app to track subway arrivals in New York City to run on a Raspberry Pi in my apartment."
           thumbnail={thumbnailSubwayArrivals}
           skills={["Figma", "TypeScript", "React", "Raspberry Pi"]}
-          onClick={() => window.open("https://mta-station-board.netlify.app/station/629", "_blank")}
+          href="https://mta-station-board.netlify.app/station/629"
         />
         <EventProject
           title="Echoes of Wisdom UI Redesign"
           description={<p>Prototyping and evaluating UI alternatives for a specific menu in <i>The Legend of Zelda: Echoes of Wisdom</i>.</p>}
           thumbnail={thumbnailEchoesOfWisdom}
           skills={["Figma", "TypeScript", "React"]}
-          onClick={() => window.open("https://echoes-of-wisdom-ui.netlify.app/", "_blank")}
+          href="https://echoes-of-wisdom-ui.netlify.app/"
         />
         <EventProject
           title="PassMapper"
           description="Digital portfolio of my transit card collection."
           thumbnail={thumbnailPassmapper}
           skills={["Figma", "TypeScript", "React"]}
-          onClick={() => window.open("https://passmapper.netlify.app/", "_blank")}
+          href="https://passmapper.netlify.app/"
         />
         <EventProject
           title="LetterGrams"
           description="Daily Bananagrams-like word game."
           thumbnail={thumbnailLettergrams}
           skills={["Figma", "TypeScript", "React"]}
-          onClick={() => window.open("https://lettergrams.netlify.app/", "_blank")}
+          href="https://lettergrams.netlify.app/"
         />
       </section >
     </>

@@ -7,10 +7,12 @@ type EventProjectProps = {
   thumbnail?: string;
   skills?: string[];
   onClick?: () => void;
+  to?: string;
+  href?: string;
 };
 
 export default function EventProject(props: EventProjectProps) {
-  const { title, description, thumbnail, skills, onClick } = props;
+  const { title, description, thumbnail, skills, onClick, to, href } = props;
 
   return (
     <EventBase
@@ -19,6 +21,8 @@ export default function EventProject(props: EventProjectProps) {
       thumbnailWidget={thumbnail ? <img className="project-thumbnail" src={thumbnail} alt={title} /> : null}
       skills={skills}
       onClick={onClick}
+      to={to}
+      href={href}
     />
   );
 }

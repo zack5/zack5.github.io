@@ -1,15 +1,26 @@
 import { GoArrowUpRight } from "react-icons/go";
+import { Link } from 'react-router-dom';
 import type { ReactNode } from 'react';
 
 import BorderGlow from './BorderGlow';
 
 import Skill from "./Skill";
 
-export default function EventBase({ title, description, thumbnailWidget, skills, onClick }:
-  { title: string, thumbnailWidget: React.ReactNode, description?: ReactNode, skills?: string[], onClick?: () => void }) {
-  return (
-    
-    <article className="event-base" onClick={onClick}>
+type EventBaseProps = {
+  title: string;
+  thumbnailWidget: React.ReactNode;
+  description?: ReactNode;
+  skills?: string[];
+  onClick?: () => void;
+  to?: string; // internal navigation via react-router Link
+  href?: string; // external URL — opens in new tab
+};
+
+export default function EventBase({ title, description, thumbnailWidget, skills, onClick, to, href }:
+  EventBaseProps) {
+
+  const content = (
+    <article className="event-base">
       <BorderGlow xInset={-28} yInset={-25} />
       <div className="event-thumbnail">
         {thumbnailWidget}
@@ -33,5 +44,27 @@ export default function EventBase({ title, description, thumbnailWidget, skills,
         )}
       </div>
     </article>
+  );
+
+  if (to) {
+    return (
+      <Link to={to} className="no-text-decoration event-link">
+        {content}
+      </Link>
+    );
+  }
+
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className="no-text-decoration event-link">
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <div onClick={onClick} role={onClick ? 'button' : undefined} tabIndex={onClick ? 0 : undefined}>
+      {content}
+    </div>
   );
 }

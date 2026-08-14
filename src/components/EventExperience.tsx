@@ -7,10 +7,12 @@ type EventExperienceProps = {
   duration?: string;
   skills?: string[];
   onClick?: () => void;
+  to?: string;
+  href?: string;
 };
 
 export default function EventExperience(props: EventExperienceProps) {
-  const { title, description, duration, skills, onClick } = props;
+  const { title, description, duration, skills, onClick, to, href } = props;
 
   return (
     <EventBase
@@ -19,6 +21,8 @@ export default function EventExperience(props: EventExperienceProps) {
       thumbnailWidget={duration ? <h4 className="event-duration">{duration}</h4> : null}
       skills={skills}
       onClick={onClick}
+      to={to}
+      href={href}
     />
   );
 }

@@ -1,3 +1,4 @@
+import { GoArrowUpRight } from "react-icons/go";
 import EventExperience from "./EventExperience";
 import EventProject from "./EventProject";
 import thumbnailEchoesOfWisdom from "../assets/project-thumbnails/echoes-of-wisdom.jpg";
@@ -9,11 +10,13 @@ export default function Main() {
   return (
     <>
       <section id="about" data-toc-title="About" className="about">
-        <p>I'm a programmer who loves creating organized and intuitive user  experiences. Recently, I've been building interfaces for large-scale, multiplayer,  cross-platform video games.</p>
-        <p>Currently, I’m a UI Engineer at Epic Games on the Ecosystem Experience team. I lead engineering efforts to improve the Discovery system, partnering closely with designers and engineers to ensure we craft the smoothest experience possible for players and developers authoring content within the Fortnite Ecosystem.</p>
-        <p>In my spare time, you can usually find me hiking, singing, and finding new ways to have fun in old Pokemon games.</p>
+        <h3>About</h3>
+        <p>I'm a programmer who enjoys pointing at a screen and saying, "I made that!" Recently, I've been building interfaces for large-scale, multiplayer, cross-platform video games.</p>
+        <p>Currently, I’m a UI Engineer at <a href="https://www.epicgames.com/" target="_blank" rel="noopener noreferrer">Epic Games</a>. I lead engineering efforts to improve the <a href="https://fortnite.fandom.com/wiki/Discover" target="_blank" rel="noopener noreferrer">Discover</a> system within the Fortnite main menu, partnering closely with designers and engineers to ensure we craft the smoothest experience possible for players and developers authoring content within the Fortnite ecosystem.</p>
+        <p>I also enjoy hiking, singing, extolling the virtues of public transit, and finding new ways to have fun in old Pokémon games.</p>
       </section>
       <section id="experience" data-toc-title="Experience" className="events">
+        <h3>Experience</h3>
         <EventExperience
           title="Epic Games - UI Engineer"
           description="UI Engineer on the Fortnite Ecosystem Experience team."
@@ -30,14 +33,15 @@ export default function Main() {
         />
         <EventExperience
           title="Santa Monica Studio - Intern"
-          description="Collaborated with designers and artists to implement HUD and menu elements for God of War: Ragnarok."
+          description="Collaborated with designers and artists to implement HUD and menu elements for <i>God of War: Ragnarok</i>."
           duration="2019"
           skills={["C++", "Lua"]}
           onClick={() => window.open("https://www.epicgames.com/fortnite/en-US/home", "_blank")}
         />
-        <a href="/Zack Cinquini 2025.pdf" aria-label="Download resume (PDF)">View Resume</a>
+        <a href="/Zack Cinquini 2025.pdf" aria-label="Download resume (PDF)" target="_blank" rel="noopener noreferrer">View Resume<GoArrowUpRight className="link-arrow"/></a>
       </section>
       <section id="projects" data-toc-title="Projects" className="events">
+        <h3>Projects</h3>
         <EventProject
           title="Subway Arrivals Board"
           description="I was tired of narrowly missing trains, so I designed an app to track subway arrivals in New York City to run on a Raspberry Pi in my apartment."
@@ -47,14 +51,14 @@ export default function Main() {
         />
         <EventProject
           title="Echoes of Wisdom UI Exploration"
-          description="Prototyping and evaluating UI alternatives for The Legend of Zelda: Echoes of Wisdom. "
+          description="Prototyping and evaluating UI alternatives for <i>The Legend of Zelda: Echoes of Wisdom</i>. "
           thumbnail={thumbnailEchoesOfWisdom}
           skills={["TypeScript", "React"]}
           onClick={() => window.open("https://echoes-of-wisdom-ui.netlify.app/", "_blank")}
         />
         <EventProject
           title="PassMapper"
-          description="Digital portfolio of my transit card collection. Made with TypeScript and React."
+          description="Digital portfolio of my transit card collection."
           thumbnail={thumbnailPassmapper}
           skills={["TypeScript", "React"]}
           onClick={() => window.open("https://passmapper.netlify.app/", "_blank")}

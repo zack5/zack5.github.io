@@ -22,17 +22,17 @@
   gap: 3rem;
 }
 
+@media (max-width: 1000px) {
+  .content {
+    flex-direction: column;
+  }
+}
+
 main {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-}
-
-@media (max-width: 1000px) {
-  .content {
-    flex-direction: column;
-  }
 }
 
 section > :first-child {
@@ -56,7 +56,11 @@ section > :first-child {
 
 @media (max-width: 1000px) {
   .sidebar {
+    position: relative;
     width: 100%;
+    justify-content: flex-start;
+    height: 0%;
+    margin-bottom: 3rem;
   }
 }
 
@@ -114,7 +118,26 @@ nav {
 main {
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 8rem;
+}
+
+section h3 {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  section h3 {
+    display: block;
+  }
+}
+
+:is(a, .event-base) .link-arrow {
+  margin-bottom: -0.2rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+:is(a, .event-base):hover .link-arrow {
+  transform: translateX(0.1rem) translateY(-0.1rem);
 }
 
 /* About */
@@ -129,15 +152,23 @@ main {
 .events {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 4.25rem;
 }
 
 .event-base {
+  position: relative;
   display: flex;
   flex-direction: row;
   gap: 0.7rem;
   width: 100%;
 }
+/* 
+.event-base h2 {
+  transition: color 0.2s ease-in-out;
+}
+.event-base:hover h2 {
+  color: var(--color-text-accent);
+} */
 
 .event-thumbnail {
   flex: 0 0 25%;

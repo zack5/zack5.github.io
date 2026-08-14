@@ -1,9 +1,15 @@
+import { GoArrowUpRight } from "react-icons/go";
+
+import BorderGlow from './BorderGlow';
+
 import Skill from "./Skill";
 
 export default function EventBase({ title, description, thumbnailWidget, skills, onClick }:
   { title: string, thumbnailWidget: React.ReactNode, description?: string, skills?: string[], onClick?: () => void }) {
   return (
+    
     <article className="event-base" onClick={onClick}>
+      <BorderGlow xInset={-28} yInset={-25} />
       <div className="event-thumbnail">
         {thumbnailWidget}
       </div>
@@ -11,6 +17,7 @@ export default function EventBase({ title, description, thumbnailWidget, skills,
         <header className="event-title">
           <h2 id={`event-${title.toLowerCase().replace(/\s+/g, '-')}`}>
             {title}
+            <GoArrowUpRight className="link-arrow" />
           </h2>
         </header>
         {!!description && <p>{description}</p>}

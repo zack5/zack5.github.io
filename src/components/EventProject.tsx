@@ -1,8 +1,9 @@
 import EventBase from "./EventBase";
+import type { ReactNode } from 'react';
 
 type EventProjectProps = {
   title: string;
-  description?: string;
+  description?: ReactNode;
   thumbnail?: string;
   skills?: string[];
   onClick?: () => void;

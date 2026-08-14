@@ -1,8 +1,9 @@
 import EventBase from "./EventBase";
+import type { ReactNode } from 'react';
 
 type EventExperienceProps = {
   title: string;
-  description?: string;
+  description?: ReactNode;
   duration?: string;
   skills?: string[];
   onClick?: () => void;

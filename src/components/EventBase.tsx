@@ -1,11 +1,12 @@
 import { GoArrowUpRight } from "react-icons/go";
+import type { ReactNode } from 'react';
 
 import BorderGlow from './BorderGlow';
 
 import Skill from "./Skill";
 
 export default function EventBase({ title, description, thumbnailWidget, skills, onClick }:
-  { title: string, thumbnailWidget: React.ReactNode, description?: string, skills?: string[], onClick?: () => void }) {
+  { title: string, thumbnailWidget: React.ReactNode, description?: ReactNode, skills?: string[], onClick?: () => void }) {
   return (
     
     <article className="event-base" onClick={onClick}>

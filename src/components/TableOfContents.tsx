@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
@@ -13,9 +14,10 @@ export default function TableOfContents() {
     const navRef = useRef<HTMLElement | null>(null);
     const indicatorRef = useRef<HTMLDivElement | null>(null);
     const [indicatorTop, setIndicatorTop] = useState(0);
+    const location = useLocation();
+    const [sections, setSections] = useState<Array<{ id: string; title: string }>>([]);
 
     useEffect(() => {
-        const sections = Array.from(document.querySelectorAll<HTMLElement>("section[data-toc-title]"));
         if (!sections.length) return;
 
         const visibleSections = new Map<string, IntersectionObserverEntry>();
@@ -25,12 +27,10 @@ export default function TableOfContents() {
                 visibleSections.set(entry.target.id, entry);
             });
 
-            const allVisible = Array.from(visibleSections.values()).filter(e => e.isIntersecting);
+            const allVisible = Array.from(visibleSections.values()).filter((e) => e.isIntersecting);
             if (!allVisible.length) return;
 
-            const best = allVisible.reduce((a, b) =>
-                a.intersectionRatio > b.intersectionRatio ? a : b
-            );
+            const best = allVisible.reduce((a, b) => (a.intersectionRatio > b.intersectionRatio ? a : b));
 
             setActiveId(best.target.id || null);
         };
@@ -41,15 +41,22 @@ export default function TableOfContents() {
             threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
         });
 
-        sections.forEach((s) => observerRef.current?.observe(s));
+        sections.forEach((s) => {
+            const el = document.getElementById(s.id);
+            if (el) observerRef.current?.observe(el);
+        });
 
         return () => observerRef.current?.disconnect();
-    }, []);
+    }, [sections]);
 
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("section[data-toc-title]")).map((s) => ({
-        id: s.id,
-        title: s.dataset.tocTitle || s.id,
-    }));
+    useEffect(() => {
+        const secs = Array.from(document.querySelectorAll<HTMLElement>("section[data-toc-title]") || []).map((s) => ({
+            id: s.id,
+            title: s.dataset.tocTitle || s.id,
+        }));
+        setSections(secs);
+        if (!secs.length) setActiveId(null);
+    }, [location]);
 
     useEffect(() => {
         const update = () => {

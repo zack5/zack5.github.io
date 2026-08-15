@@ -1,4 +1,5 @@
 import { GoArrowUpRight } from "react-icons/go";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import type { ReactNode } from 'react';
 
@@ -29,7 +30,7 @@ export default function EventBase({ title, description, thumbnailWidget, skills,
         <header className="event-title">
           <h2 id={`event-${title.toLowerCase().replace(/\s+/g, '-')}`}>
             {title}
-            <GoArrowUpRight className="link-arrow" />
+            {href ? <GoArrowUpRight className="link-arrow" /> : <IoChatbubbleEllipsesOutline className="link-arrow link-more-info" />}
           </h2>
         </header>
         {!!description && <p>{description}</p>}

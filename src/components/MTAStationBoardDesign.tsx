@@ -1,3 +1,5 @@
+import BackButton from "./BackButton";
+
 import paperPrototype from '../assets/mta/prototype.jpeg'
 import reference from '../assets/mta/reference.jpeg'
 import hardware from '../assets/mta/hardware.jpeg'
@@ -11,12 +13,12 @@ import Figma5 from '../assets/mta/Figma 5 - Alerts.png'
 export default function MTAStationBoardDesign() {
   return (
     <article className="portfolio" aria-labelledby="mta-station-board-design-heading">
-      <h2 id="mta-station-board-design-heading">Subway Arrivals Board</h2>
+      <h1 id="mta-station-board-design-heading">Subway Arrivals Board</h1>
       <p>
         I love getting around the city on public transit, but I don't love narrowly missing trains. It's always been a dream of mine to have a station board permanently in my own apartment to optimize my trips.
       </p>
 
-      <h4 className="portfolio-subheading">Paper Prototypes</h4>
+      <h2 className="portfolio-subheading">Paper Prototypes</h2>
       <p>
         Some quick coardboard cutouts helped validate that I was designing for the correct size for the space.
       </p>
@@ -24,7 +26,7 @@ export default function MTAStationBoardDesign() {
         <img src={paperPrototype} className="portfolio-image-capped" />
       </figure>
 
-      <h4 className="portfolio-subheading">Reference</h4>
+      <h2 className="portfolio-subheading">Reference</h2>
       <p>
         The MTA started refreshing its arrivals boards with a <a href="https://boingboing.net/2025/05/22/nyc-subway-arrival-boards-get-user-friendly-redesign.html">new design in 2025</a>. I wanted my arrivals board to echo this style.
       </p>
@@ -32,7 +34,7 @@ export default function MTAStationBoardDesign() {
         <img src={reference} className="portfolio-image-capped" />
       </figure>
 
-      <h4 className="portfolio-subheading">Figma Prototypes</h4>
+      <h2 className="portfolio-subheading">Figma Prototypes</h2>
       <figure className="portfolio-images">
         <img src={Figma1} className="no-bottom-margin portfolio-image-capped-2" />
         <span>
@@ -47,7 +49,7 @@ export default function MTAStationBoardDesign() {
         Some final tweaks to the upcoming trains section helped generalize the design for other stations where multiple routes may arrive on the same platform. I reduced their opacity further to highlight the current train as the focus of the visual hierarchy.
       </span>
 
-      <h4 className="portfolio-subheading">Hardware</h4>
+      <h2 className="portfolio-subheading">Hardware</h2>
       <figure className="portfolio-images">
         <img src={hardware} className="no-bottom-margin portfolio-image-capped" />
         <p>
@@ -61,7 +63,7 @@ export default function MTAStationBoardDesign() {
         I love seeing it on my shelf! You can <a href="https://mta-station-board.netlify.app/stationdisplay/629">try the display app for yourself.</a>
       </p>
 
-      <h4 className="portfolio-subheading">Mobile Exploration</h4>
+      <h2 className="portfolio-subheading">Mobile Exploration</h2>
       <p>
         While developping the app for the display, I found myself actually using it while riding the subway at times when a station board wasn't within view. This inspired me to iterate more on a layout optimized for mobile.
       </p>
@@ -86,6 +88,7 @@ export default function MTAStationBoardDesign() {
       <p>
         Feel free to <a href="https://mta-station-board.netlify.app/station/611">try the mobile-optimized app for yourself!</a>
       </p>
+      <BackButton />
     </article>
   )
 }

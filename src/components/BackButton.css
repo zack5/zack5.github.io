@@ -1,0 +1,32 @@
+.back-button-container-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.back-button-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 35%;
+}
+
+.back-button {
+  width: 100%;
+  width: 100%;
+  padding: 0.9rem 1.3rem;
+  background: transparent;
+}
+
+.back-button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.back-arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+}

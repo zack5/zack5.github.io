@@ -1,5 +1,6 @@
 
 import XEmbed from "./XEmbed";
+import BackButton from "./BackButton";
 
 export default function Fortnite() {
   return (
@@ -15,6 +16,7 @@ export default function Fortnite() {
       <figure className="portfolio-images" role="group" aria-label="Fortnite Tile Streamlining Twitter post">
         <XEmbed url="https://x.com/FortniteStatus/status/2018777513892499483" />
       </figure>
+      <BackButton />
     </article>
   )
 }

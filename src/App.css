@@ -148,6 +148,10 @@ section h3 {
   transform: translateX(0.1rem) translateY(-0.1rem);
 }
 
+.link-more-info {
+  margin-left: 0.2rem;
+}
+
 /* About */
 .about {
   display: flex;

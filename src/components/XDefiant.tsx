@@ -1,3 +1,5 @@
+import BackButton from "./BackButton";
+
 import battlepass from "../assets/xdefiant/battlepass.png";
 import challenges from "../assets/xdefiant/challenges.png";
 import gameplay from "../assets/xdefiant/gameplay.gif";
@@ -26,6 +28,7 @@ export default function XDefiant() {
         <img src={battlepass} alt="Battle Pass purchase screen" />
         <img src={challenges} alt="Progression screen showing challenges to earn factions" />
       </figure>
+      <BackButton />
     </article>
   )
 }

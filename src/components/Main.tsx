@@ -55,7 +55,7 @@ export default function Main() {
           description="I was tired of narrowly missing trains, so I designed an app to track subway arrivals in New York City to run on a Raspberry Pi in my apartment."
           thumbnail={thumbnailSubwayArrivals}
           skills={["Figma", "TypeScript", "React", "Raspberry Pi"]}
-          href="https://mta-station-board.netlify.app/station/629"
+          to="mta-station-board-design"
         />
         <EventProject
           title="Echoes of Wisdom UI Redesign"

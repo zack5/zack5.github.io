@@ -18,6 +18,19 @@ export default function TableOfContents() {
     const location = useLocation();
     const [sections, setSections] = useState<Array<{ id: string; title: string }>>([]);
 
+    const getHashTargetId = (hash: string | null | undefined) => {
+        if (!hash) return "";
+
+        const withoutLeadingHash = hash.replace(/^#/, "");
+        const parts = withoutLeadingHash.split("#").filter(Boolean);
+        return parts.at(-1) ?? "";
+    };
+
+    const getRouteAwareHash = (id: string) => {
+        const routePath = location.pathname === "/" ? "" : location.pathname;
+        return routePath ? `#${routePath}#${id}` : `#${id}`;
+    };
+
     useEffect(() => {
         if (!sections.length) return;
 
@@ -95,7 +108,7 @@ export default function TableOfContents() {
     // Scroll to section when the URL hash changes (or on history navigation)
     useEffect(() => {
         const scrollToHash = (hash: string) => {
-            const id = hash?.replace(/^#/, "");
+            const id = getHashTargetId(hash);
             if (!id) return;
             const el = document.getElementById(id);
             if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -115,7 +128,7 @@ export default function TableOfContents() {
             window.removeEventListener("hashchange", onHashChange);
             window.removeEventListener("popstate", onPopState);
         };
-    }, [sections, location]);
+    }, [sections, location, getHashTargetId]);
 
     const handleClick = (e: React.MouseEvent, id?: string) => {
         e.preventDefault();
@@ -131,10 +144,11 @@ export default function TableOfContents() {
             }, 700);
 
             el.scrollIntoView({ behavior: "smooth", block: "start" });
+            const targetHash = getRouteAwareHash(id);
             try {
-                window.history.pushState(null, "", `/#/#${id}`);
+                window.history.pushState(null, "", targetHash);
             } catch (err) {
-                window.location.hash = `#${id}`;
+                window.location.hash = targetHash;
             }
             setActiveId(id || null);
         }
@@ -166,7 +180,7 @@ export default function TableOfContents() {
                                 transition={{ duration: 0.2, ease: "easeInOut" }}
                             >
                                 <a
-                                    href={`#${s.id}`}
+                                    href={getRouteAwareHash(s.id)}
                                     className={s.id === activeId ? "active" : ""}
                                     onClick={(e) => handleClick(e, s.id)}
                                 >

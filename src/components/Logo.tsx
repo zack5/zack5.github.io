@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Logo.css';
 
@@ -14,13 +14,30 @@ const distance = (p1: Position, p2: Position) => {
 export default function Logo() {
     const VIEW_BOX_WIDTH = 430;
     const VIEW_BOX_HEIGHT = 116;
+
     const FACE = { x: 206.5, y: 87 };
     const FACE_EYE_SPACING = 26;
     const EYE_WIDTH = 8;
     const EYE_HEIGHT = 15;
 
+    const EYE_ROTATION_FACTOR = 0.04 // 0 = no scaling 0.1 = too much, 
+    const EYE_SPACING_FACTOR = 0.6; // how much the eyes move apart as the mouse moves away
+    const MOUSE_TRACKING_SPEED = 0.05; // .12 is reasonably snappy
+
+    const BLINK_MIN_INTERVAL_SEC = 2; // minimum seconds between blinks
+    const BLINK_MAX_INTERVAL_SEC = 8; // maximum seconds between blinks
+    const BLINK_DURATION_MS = 70; // how long a blink lasts (ms)
+    const BLINK_HEIGHT = 7; // eye height while blinking
+    const BLINK_Y_OFFSET = 2; // y offset while blinking
+
     const svgRef = useRef<SVGSVGElement | null>(null);
+    const blinkTimeoutRef = useRef<number | null>(null);
+    const nextBlinkTimeoutRef = useRef<number | null>(null);
+    const [isMouseNear, setIsMouseNear] = useState(false);
+    const [isBlinking, setIsBlinking] = useState(false);
     const [mouse, setMouse] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+    const [mouseAnimated, setMouseAnimated] = useState<{ x: number; y: number }>({ x: FACE.x, y: FACE.y });
+    const rafRef = useRef<number | null>(null);
 
     const handleMouseMove = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
         const svg = svgRef.current;
@@ -41,29 +58,77 @@ export default function Logo() {
         }
     };
 
-    const distanceToMouse = distance(FACE, mouse);
+    useEffect(() => {
+        const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+       const target = isMouseNear ? mouse : FACE;
 
-    const offsetToMouseX = mouse.x - FACE.x;
-    const eyeOffsetX = Math.sqrt(Math.abs(offsetToMouseX)) * Math.sign(offsetToMouseX) * 1.3;
-    const offsetToMouseY = mouse.y - FACE.y;
+        const animate = () => {
+            setMouseAnimated(prev => {
+                const nx = lerp(prev.x, target.x, MOUSE_TRACKING_SPEED);
+                const ny = lerp(prev.y, target.y, MOUSE_TRACKING_SPEED);
+
+                if (Math.abs(nx - prev.x) < 0.01 && Math.abs(ny - prev.y) < 0.01) {
+                    return prev;
+                }
+
+                return { x: nx, y: ny };
+            });
+
+            rafRef.current = requestAnimationFrame(animate);
+        };
+
+        rafRef.current = requestAnimationFrame(animate);
+
+        return () => {
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        };
+    }, [mouse, isMouseNear]);
+
+    useEffect(() => {
+        const schedule = () => {
+            const min = BLINK_MIN_INTERVAL_SEC * 1000;
+            const max = BLINK_MAX_INTERVAL_SEC * 1000;
+            const delay = Math.random() * (max - min) + min;
+
+            nextBlinkTimeoutRef.current = window.setTimeout(() => {
+                setIsBlinking(true);
+                blinkTimeoutRef.current = window.setTimeout(() => {
+                    setIsBlinking(false);
+                    schedule();
+                }, BLINK_DURATION_MS);
+            }, delay);
+        };
+
+        schedule();
+
+        return () => {
+            if (nextBlinkTimeoutRef.current) clearTimeout(nextBlinkTimeoutRef.current);
+            if (blinkTimeoutRef.current) clearTimeout(blinkTimeoutRef.current);
+        };
+    }, []);
+
+    const distanceToMouse = distance(FACE, mouseAnimated);
+
+    const offsetToMouseX = mouseAnimated.x - FACE.x;
+    const eyeOffsetX = Math.sqrt(Math.abs(offsetToMouseX)) * Math.sign(offsetToMouseX) * 1.45;
+    const offsetToMouseY = mouseAnimated.y - FACE.y;
     const eyeOffsetY = Math.sqrt(Math.abs(offsetToMouseY)) * Math.sign(offsetToMouseY);
-
-    const faceEyeSpacing = FACE_EYE_SPACING - Math.sqrt(distanceToMouse) * 0.4;
+    
+    const faceEyeSpacing = FACE_EYE_SPACING - Math.sqrt(distanceToMouse) * EYE_SPACING_FACTOR;
     const eyeCenter = { x: eyeOffsetX + FACE.x, y: eyeOffsetY + FACE.y };
     const eyeLeft = {
         x: eyeCenter.x - faceEyeSpacing / 2,
-        y: eyeCenter.y - Math.max(0, FACE.x - eyeCenter.x) * (eyeCenter.y - FACE.y) * 0.02
+        y: eyeCenter.y - Math.max(0, FACE.x - eyeCenter.x) * (eyeCenter.y - FACE.y) * 0.02 + (isBlinking ? BLINK_Y_OFFSET : 0)
     };
     const eyeRight = {
         x: eyeCenter.x + faceEyeSpacing / 2, 
-        y: eyeCenter.y - Math.max(0, eyeCenter.x - FACE.x) * (eyeCenter.y - FACE.y) * 0.02
+        y: eyeCenter.y - Math.max(0, eyeCenter.x - FACE.x) * (eyeCenter.y - FACE.y) * 0.02 + (isBlinking ? BLINK_Y_OFFSET : 0)
     };
 
-    const EYE_ROTATION_FACTOR = 0.04 // 0 = no scaling 0.1 = too much, 
     const leftEyeWidth = EYE_WIDTH * (1 - EYE_ROTATION_FACTOR * Math.sqrt(Math.max(FACE.x - eyeLeft.x, 0)));
     const rightEyeWidth = EYE_WIDTH * (1 - EYE_ROTATION_FACTOR * Math.sqrt(Math.max(eyeRight.x - FACE.x, 0)));
-    const leftEyeHeight = EYE_HEIGHT;
-    const rightEyeHeight = EYE_HEIGHT;
+    const leftEyeHeight = isBlinking ? BLINK_HEIGHT : EYE_HEIGHT;
+    const rightEyeHeight = isBlinking ? BLINK_HEIGHT : EYE_HEIGHT;
 
 
 
@@ -73,6 +138,8 @@ export default function Logo() {
                 ref={svgRef}
                 viewBox={`0 0 ${VIEW_BOX_WIDTH} ${VIEW_BOX_HEIGHT}`}
                 onMouseMove={handleMouseMove}
+                onMouseEnter={() => setIsMouseNear(true)}
+                onMouseLeave={() => setIsMouseNear(false)}
                 className="logo-svg"
             >
                 <text x={0} y={0} className="logo-text">

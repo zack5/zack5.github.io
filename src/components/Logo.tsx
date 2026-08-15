@@ -28,11 +28,11 @@ export default function Logo() {
     const MOUSE_TRACKING_SPEED = 0.05; // .12 is reasonably snappy
     const MOUSE_LEAVE_DELAY_MS = 1300; // delay before considering the mouse "away"
 
-    const IDLE_RANDOM_MIN_SEC = 5; // min seconds before picking a random idle target
-    const IDLE_RANDOM_MAX_SEC = 20; // max seconds before picking a random idle target
+    const IDLE_RANDOM_MIN_SEC = 4; // min seconds before picking a random idle target
+    const IDLE_RANDOM_MAX_SEC = 16; // max seconds before picking a random idle target
 
-    const BLINK_MIN_INTERVAL_SEC = 4; // minimum seconds between blinks
-    const BLINK_MAX_INTERVAL_SEC = 12; // maximum seconds between blinks
+    const BLINK_MIN_INTERVAL_SEC = 3; // minimum seconds between blinks
+    const BLINK_MAX_INTERVAL_SEC = 11; // maximum seconds between blinks
     const BLINK_DURATION_MS = 70; // how long a blink lasts (ms)
     const BLINK_HEIGHT = 7; // eye height while blinking
     const BLINK_Y_OFFSET = 2; // y offset while blinking
@@ -222,6 +222,8 @@ export default function Logo() {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 className="logo-svg"
+                data-draggable="false"
+                onMouseDown={(e) => e.preventDefault()}
             >
                 <text x={0} y={0} className="logo-text">
                     {'ZACK'}

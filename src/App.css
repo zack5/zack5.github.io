@@ -5,7 +5,7 @@
   width: 100%;
   height: 100dvh; /* or 100dvh for better mobile browser support */
   z-index: -1;
-  background: radial-gradient(at top center, var(--color-accent), #3C106B 30%, #06133C 80%);
+  background: radial-gradient(at top center, var(--color-accent), var(--color-accent-deeper) 30%, var(--color-accent-deepest) 80%);
 }
 
 .page-margins {  

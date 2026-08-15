@@ -129,6 +129,10 @@ main {
   gap: 8rem;
 }
 
+section {
+  scroll-margin: 3rem; 
+}
+
 section h3 {
   display: none;
 }

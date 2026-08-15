@@ -163,15 +163,6 @@ p, span {
 }
 
 button {
-  border-radius: 15px;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  color: var(--color-header);
-  background-color: transparent;
-  border: 2px auto white;
 }
 button:focus,
 button:focus-visible {

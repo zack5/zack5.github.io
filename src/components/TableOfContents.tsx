@@ -98,7 +98,7 @@ export default function TableOfContents() {
             const id = hash?.replace(/^#/, "");
             if (!id) return;
             const el = document.getElementById(id);
-            if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
             setActiveId(id);
         };
 
@@ -130,7 +130,7 @@ export default function TableOfContents() {
                 manualScrollLockRef.current = null;
             }, 700);
 
-            el.scrollIntoView({ behavior: "smooth", block: "center" });
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
             try {
                 window.history.pushState(null, "", `/#/#${id}`);
             } catch (err) {

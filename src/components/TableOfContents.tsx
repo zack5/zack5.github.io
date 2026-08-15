@@ -103,26 +103,30 @@ export default function TableOfContents() {
                 transition={{ duration: 0.2, ease: "easeInOut" }}
                 ref={indicatorRef}
             >
-                <IoPlay/>
+                <IoPlay />
             </motion.div>
             <nav className="toc" aria-label="Table of contents" ref={navRef}>
                 <ul>
-                    {sections.map((s) => (
-                        <motion.li 
-                            key={s.id}
-                            initial={{ x: 0 }}
-                            animate={{ x: s.id === activeId ? 2 : 0 }}
-                            transition={{ duration: 0.2, ease: "easeInOut" }}
-                        >
-                            <a
-                                href={`#${s.id}`}
-                                className={s.id === activeId ? "active" : ""}
-                                onClick={(e) => handleClick(e, s.id)}
+                    {sections.map((s) => {
+                        const isActive = s.id === activeId
+                        return (
+                            <motion.li
+                                key={s.id}
+                                initial={{ x: 0 }}
+                                animate={{ x: isActive ? 3 : 0 }}
+                                whileHover={{ x: 3 }}
+                                transition={{ duration: 0.2, ease: "easeInOut" }}
                             >
-                                <h4>{s.title}</h4>
-                            </a>
-                        </motion.li>
-                    ))}
+                                <a
+                                    href={`#${s.id}`}
+                                    className={s.id === activeId ? "active" : ""}
+                                    onClick={(e) => handleClick(e, s.id)}
+                                >
+                                    <h4>{s.title}</h4>
+                                </a>
+                            </motion.li>
+                        );
+                    })}
                 </ul>
             </nav>
         </div>

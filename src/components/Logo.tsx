@@ -166,10 +166,10 @@ export default function Logo() {
                     const ry = Math.random() * VIEW_BOX_HEIGHT;
                     setIdleTarget({ x: rx, y: ry });
                     
-                    await sleep(1000);
+                    await sleep(1500);
 
                     const direction = Math.random() * 2 * Math.PI;
-                    const distance = 100;
+                    const distance = 30;
                     const rx2 = rx + distance * Math.cos(direction);
                     const ry2 = ry + distance * Math.sin(direction);
                     setIdleTarget({ x: rx2, y: ry2 });

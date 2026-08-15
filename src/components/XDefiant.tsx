@@ -8,7 +8,7 @@ import playMenu from "../assets/xdefiant/playmenu.gif";
 export default function XDefiant() {
   return (
     <article className="portfolio" aria-labelledby="xdefiant-heading">
-      <h2 id="xdefiant-heading">XDefiant</h2>
+      <h1 id="xdefiant-heading">XDefiant</h1>
       <p>
         XDefiant is a free-to-play first-person shooter developped by Ubisoft. Its launch in May 2024 drew over <a href="https://gamerant.com/xdefiant-11-million-players/" aria-label="Article about XDefiant reaching 11 Million players">11 Million players</a> in the first two weeks.
       </p>

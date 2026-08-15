@@ -26,8 +26,11 @@ export default function Logo() {
     const MOUSE_TRACKING_SPEED = 0.05; // .12 is reasonably snappy
     const MOUSE_LEAVE_DELAY_MS = 1300; // delay before considering the mouse "away"
 
-    const BLINK_MIN_INTERVAL_SEC = 2; // minimum seconds between blinks
-    const BLINK_MAX_INTERVAL_SEC = 8; // maximum seconds between blinks
+    const IDLE_RANDOM_MIN_SEC = 5; // min seconds before picking a random idle target
+    const IDLE_RANDOM_MAX_SEC = 25; // max seconds before picking a random idle target
+
+    const BLINK_MIN_INTERVAL_SEC = 4; // minimum seconds between blinks
+    const BLINK_MAX_INTERVAL_SEC = 12; // maximum seconds between blinks
     const BLINK_DURATION_MS = 70; // how long a blink lasts (ms)
     const BLINK_HEIGHT = 7; // eye height while blinking
     const BLINK_Y_OFFSET = 2; // y offset while blinking
@@ -36,6 +39,8 @@ export default function Logo() {
     const blinkTimeoutRef = useRef<number | null>(null);
     const nextBlinkTimeoutRef = useRef<number | null>(null);
     const mouseLeaveTimeoutRef = useRef<number | null>(null);
+    const idleTimeoutRef = useRef<number | null>(null);
+    const [idleTarget, setIdleTarget] = useState<Position | null>(null);
     const [isMouseNear, setIsMouseNear] = useState(false);
     const [isMouseDown, setIsMouseDown] = useState(false);
     const [isBlinking, setIsBlinking] = useState(false);
@@ -79,7 +84,7 @@ export default function Logo() {
         const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
         const target = isMouseDown
             ? { x: FACE.x, y: FACE.y + EYE_HEIGHT * 2 }
-            : isMouseNear ? mouse : FACE;
+            : isMouseNear ? mouse : (idleTarget ?? FACE);
 
         const animate = () => {
             setMouseAnimated(prev => {
@@ -101,7 +106,7 @@ export default function Logo() {
         return () => {
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
         };
-    }, [mouse, isMouseNear, isMouseDown]);
+    }, [mouse, isMouseNear, isMouseDown, idleTarget]);
 
     useEffect(() => {
         const schedule = () => {
@@ -124,8 +129,36 @@ export default function Logo() {
             if (nextBlinkTimeoutRef.current) clearTimeout(nextBlinkTimeoutRef.current);
             if (blinkTimeoutRef.current) clearTimeout(blinkTimeoutRef.current);
             if (mouseLeaveTimeoutRef.current) clearTimeout(mouseLeaveTimeoutRef.current);
+            if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
         };
     }, []);
+
+    useEffect(() => {
+        // When we are not near the mouse, schedule a delayed random idle target.
+        if (!isMouseNear) {
+            // clear any existing
+            if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+
+            const min = IDLE_RANDOM_MIN_SEC * 1000;
+            const max = IDLE_RANDOM_MAX_SEC * 1000;
+            const delay = Math.random() * (max - min) + min;
+
+            idleTimeoutRef.current = window.setTimeout(() => {
+                const rx = Math.random() * VIEW_BOX_WIDTH;
+                const ry = Math.random() * VIEW_BOX_HEIGHT;
+                setIdleTarget({ x: rx, y: ry });
+            }, delay);
+        } else {
+            // Mouse returned near — reset idle target and any timers so next leave starts at FACE
+            if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+            idleTimeoutRef.current = null;
+            setIdleTarget(null);
+        }
+
+        return () => {
+            if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+        };
+    }, [isMouseNear, idleTarget]);
 
     const showBlink = isBlinking && !isMouseDown;
     const distanceToMouse = distance(FACE, mouseAnimated);
@@ -134,7 +167,7 @@ export default function Logo() {
     const eyeOffsetX = Math.sqrt(Math.abs(offsetToMouseX)) * Math.sign(offsetToMouseX) * 1.45;
     const offsetToMouseY = mouseAnimated.y - FACE.y;
     const eyeOffsetY = Math.sqrt(Math.abs(offsetToMouseY)) * Math.sign(offsetToMouseY);
-    
+
     const faceEyeSpacing = (FACE_EYE_SPACING - Math.sqrt(distanceToMouse) * EYE_SPACING_FACTOR);
     const eyeCenter = { x: eyeOffsetX + FACE.x, y: eyeOffsetY + FACE.y };
     const eyeLeft = {
@@ -142,7 +175,7 @@ export default function Logo() {
         y: eyeCenter.y - Math.max(0, FACE.x - eyeCenter.x) * (eyeCenter.y - FACE.y) * 0.02 + (showBlink ? BLINK_Y_OFFSET : 0)
     };
     const eyeRight = {
-        x: eyeCenter.x + faceEyeSpacing / 2, 
+        x: eyeCenter.x + faceEyeSpacing / 2,
         y: eyeCenter.y - Math.max(0, eyeCenter.x - FACE.x) * (eyeCenter.y - FACE.y) * 0.02 + (showBlink ? BLINK_Y_OFFSET : 0)
     };
 
@@ -161,8 +194,6 @@ export default function Logo() {
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                onMouseDown={() => setIsMouseDown(true)}
-                onMouseUp={() => setIsMouseDown(false)}
                 className="logo-svg"
             >
                 <text x={0} y={0} className="logo-text">
@@ -172,7 +203,15 @@ export default function Logo() {
                     {'CINQUINI'}
                 </text>
 
-                <circle r="20" cx={FACE.x} cy={FACE.y} fill="var(--color-header)" />
+                <g
+                    onMouseDown={() => setIsMouseDown(true)}
+                    onMouseUp={() => setIsMouseDown(false)}
+                    onMouseLeave={() => setIsMouseDown(false)}
+                >
+                    <circle r="24.5" cx={FACE.x} cy={FACE.y} fill="var(--color-header)" />
+                    <circle r="23" cx={FACE.x + 12} cy={FACE.y - 0.5} fill="var(--color-header)" />
+                    <circle r="23" cx={FACE.x - 13} cy={FACE.y - 0.5} fill="var(--color-header)" />
+                </g>
 
                 {isMouseDown ? (
                     <>
@@ -183,6 +222,7 @@ export default function Logo() {
                             width={leftEyeWidth}
                             height={leftEyeHeight}
                             preserveAspectRatio="xMidYMid meet"
+                            pointerEvents="none"
                         />
 
                         <image
@@ -193,6 +233,7 @@ export default function Logo() {
                             height={rightEyeHeight}
                             preserveAspectRatio="xMidYMid meet"
                             transform={`translate(${eyeRight.x} ${eyeRight.y}) scale(-1 1) translate(${-eyeRight.x} ${-eyeRight.y})`}
+                            pointerEvents="none"
                         />
                     </>
                 ) : (
@@ -205,6 +246,7 @@ export default function Logo() {
                             rx={EYE_WIDTH / 2}
                             ry={EYE_WIDTH / 2}
                             fill="var(--color-accent-deeper)"
+                            pointerEvents="none"
                         />
 
                         <rect
@@ -215,6 +257,7 @@ export default function Logo() {
                             rx={EYE_WIDTH / 2}
                             ry={EYE_WIDTH / 2}
                             fill="var(--color-accent-deeper)"
+                            pointerEvents="none"
                         />
                     </>
                 )}

@@ -190,7 +190,7 @@ section h3 {
   gap: 0.5rem;
 }
 
-.event-content p {
+.event-content p, .event-content span {
   font-size: 0.85rem;
   line-height: 1.0rem;
 }
@@ -217,6 +217,12 @@ section h3 {
 }
 
 /* Portfolio */
+
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
 
 .portfolio-subheading {
   margin-top: 1.2rem;

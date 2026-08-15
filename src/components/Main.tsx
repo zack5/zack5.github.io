@@ -27,7 +27,7 @@ export default function Main() {
         />
         <EventExperience
           title="Ubisoft - UI Engineer"
-          description={<p>Main point of contact for UI Engineering on <i>XDefiant</i>. Owned frontend state management, 3D characters within menus, and progression systems UI. First responder to live issues.</p>}
+          description={<span>Main point of contact for UI Engineering on <i>XDefiant</i>. Owned frontend state management, 3D characters within menus, and progression systems UI. First responder to live issues.</span>}
           duration="2020—2025"
           skills={["C++", "Snowdrop"]}
           to="XDefiant"
@@ -45,7 +45,7 @@ export default function Main() {
         <h3>Projects</h3>
         <EventProject
           title="Super Dark"
-          description={<p><i>Super Dark</i> is a social deduction board game about dark money in politics. I supported all aspects of production across our five-person team, including design, playtesting, manufacturing, and fulfillment. Funded through a successful Kickstarter campaign that raised over $25,000.</p>}
+          description={<span><i>Super Dark</i> is a social deduction board game about dark money in politics. I supported all aspects of production across our five-person team, including design, playtesting, manufacturing, and fulfillment. Funded through a successful Kickstarter campaign that raised over $25,000.</span>}
           thumbnail={thumbnailSuperDark}
           skills={["Game Design", "Kickstarter", "Logistics"]}
           href="https://www.kickstarter.com/projects/superdark/super-dark"
@@ -59,7 +59,7 @@ export default function Main() {
         />
         <EventProject
           title="Echoes of Wisdom UI Redesign"
-          description={<p>Prototyping and evaluating UI alternatives for a specific menu in <i>The Legend of Zelda: Echoes of Wisdom</i>.</p>}
+          description={<span>Prototyping and evaluating UI alternatives for a specific menu in <i>The Legend of Zelda: Echoes of Wisdom</i>.</span>}
           thumbnail={thumbnailEchoesOfWisdom}
           skills={["Figma", "TypeScript", "React"]}
           href="https://echoes-of-wisdom-ui.netlify.app/"

@@ -12,6 +12,8 @@ const distance = (p1: Position, p2: Position) => {
     return Math.hypot(p2.x - p1.x, p2.y - p1.y);
 };
 
+const sleep = (ms : number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export default function Logo() {
     const VIEW_BOX_WIDTH = 430;
     const VIEW_BOX_HEIGHT = 116;
@@ -27,7 +29,7 @@ export default function Logo() {
     const MOUSE_LEAVE_DELAY_MS = 1300; // delay before considering the mouse "away"
 
     const IDLE_RANDOM_MIN_SEC = 5; // min seconds before picking a random idle target
-    const IDLE_RANDOM_MAX_SEC = 25; // max seconds before picking a random idle target
+    const IDLE_RANDOM_MAX_SEC = 20; // max seconds before picking a random idle target
 
     const BLINK_MIN_INTERVAL_SEC = 4; // minimum seconds between blinks
     const BLINK_MAX_INTERVAL_SEC = 12; // maximum seconds between blinks
@@ -143,10 +145,35 @@ export default function Logo() {
             const max = IDLE_RANDOM_MAX_SEC * 1000;
             const delay = Math.random() * (max - min) + min;
 
-            idleTimeoutRef.current = window.setTimeout(() => {
-                const rx = Math.random() * VIEW_BOX_WIDTH;
-                const ry = Math.random() * VIEW_BOX_HEIGHT;
-                setIdleTarget({ x: rx, y: ry });
+            idleTimeoutRef.current = window.setTimeout(async () => {
+                const rand = Math.random();
+                if (rand < 0.1)
+                {
+                    // Center
+                    setIdleTarget(FACE);
+                }
+                else if (rand < 0.7)
+                {
+                    // Random target
+                    const rx = Math.random() * VIEW_BOX_WIDTH;
+                    const ry = Math.random() * VIEW_BOX_HEIGHT;
+                    setIdleTarget({ x: rx, y: ry });
+                }
+                else
+                {
+                    // Double target
+                    const rx = Math.random() * VIEW_BOX_WIDTH;
+                    const ry = Math.random() * VIEW_BOX_HEIGHT;
+                    setIdleTarget({ x: rx, y: ry });
+                    
+                    await sleep(1000);
+
+                    const direction = Math.random() * 2 * Math.PI;
+                    const distance = 100;
+                    const rx2 = rx + distance * Math.cos(direction);
+                    const ry2 = ry + distance * Math.sin(direction);
+                    setIdleTarget({ x: rx2, y: ry2 });
+                }
             }, delay);
         } else {
             // Mouse returned near — reset idle target and any timers so next leave starts at FACE

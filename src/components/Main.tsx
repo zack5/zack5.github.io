@@ -12,7 +12,7 @@ export default function Main() {
     <>
       <section id="about" data-toc-title="About" className="about">
         <h3>About</h3>
-        <p>I'm a programmer who enjoys pointing at a screen and saying, "I made that!" Recently, I've been building interfaces for large-scale, multiplayer, cross-platform video games.</p>
+        <p>Hello! I'm a programmer who loves creating organized and intuitive user experiences. Recently, I've been building interfaces for large-scale, multiplayer, cross-platform video games.</p>
         <p>After studying Computer Science at Stanford, I joined Ubisoft and Epic Games as a UI Engineer. Currently, I lead engineering efforts to improve the Discover system within the Fortnite main menu. I partner closely with designers and engineers to ensure we craft the smoothest experience possible for players and developers authoring content within the Fortnite ecosystem.</p>
         <p>I also enjoy hiking, singing, extolling the virtues of public transit, and finding new ways to have fun in old Pokémon games.</p>
       </section>

@@ -8,7 +8,7 @@ export default function Sidebar() {
       <div>
         <Logo />
         <h5 />
-        <span>I make organized and intuitive<br />user experiences.</span>
+        <p>I bring screens to life.</p>
         <TableOfContents />
       </div>
       <div className="social-links" aria-label="Social media links">

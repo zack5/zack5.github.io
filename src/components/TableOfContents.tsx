@@ -13,6 +13,7 @@ export default function TableOfContents() {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const navRef = useRef<HTMLElement | null>(null);
     const indicatorRef = useRef<HTMLDivElement | null>(null);
+    const manualScrollLockRef = useRef<number | null>(null);
     const [indicatorTop, setIndicatorTop] = useState(0);
     const location = useLocation();
     const [sections, setSections] = useState<Array<{ id: string; title: string }>>([]);
@@ -31,6 +32,11 @@ export default function TableOfContents() {
             if (!allVisible.length) return;
 
             const best = allVisible.reduce((a, b) => (a.intersectionRatio > b.intersectionRatio ? a : b));
+
+            // If a manual click triggered a programmatic smooth scroll, ignore
+            // observer updates until the lock times out so the clicked entry
+            // becomes active immediately instead of ticking through others.
+            if (manualScrollLockRef.current != null) return;
 
             setActiveId(best.target.id || null);
         };
@@ -115,12 +121,19 @@ export default function TableOfContents() {
         e.preventDefault();
         const el = id ? document.getElementById(id) : null;
         if (el) {
+            // Immediately mark this id active so the indicator jumps
+            setActiveId(id || null);
+
+            // Lock observer updates for the duration of the smooth scroll
+            if (manualScrollLockRef.current) window.clearTimeout(manualScrollLockRef.current);
+            manualScrollLockRef.current = window.setTimeout(() => {
+                manualScrollLockRef.current = null;
+            }, 700);
+
             el.scrollIntoView({ behavior: "smooth", block: "center" });
             try {
-                // Update the URL hash without triggering a hashchange event
                 window.history.pushState(null, "", `/#/#${id}`);
             } catch (err) {
-                // fallback
                 window.location.hash = `#${id}`;
             }
             setActiveId(id || null);

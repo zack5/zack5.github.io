@@ -94,12 +94,6 @@ section > :first-child {
   text-decoration: none !important;
 }
 
-.profile-image {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-}
-
 nav {
   display: flex;
   flex-direction: column;

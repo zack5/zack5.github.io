@@ -71,6 +71,13 @@ section > :first-child {
   line-height: 3.6rem;
 }
 
+.name-logo {
+  display: block;
+  width: min(100%, 270px);
+  height: auto;
+  margin-bottom: 0.75rem;
+}
+
 .sidebar h2 {
   font-size: 1.35rem;
   margin-top: 1rem;

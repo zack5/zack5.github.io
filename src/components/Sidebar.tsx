@@ -1,15 +1,13 @@
-import { Link } from 'react-router-dom';
 import { IoLogoGithub, IoLogoLinkedin, IoMail } from 'react-icons/io5';
+import Logo from './Logo';
 import TableOfContents from './TableOfContents';
 
 export default function Sidebar() {
   return (
     <aside className="sidebar" role="complementary" aria-label="Personal information">
       <div>
-        <Link to="/" className="no-text-decoration">
-          <h1>ZACK<br />CINQUINI</h1>
-        </Link>
-        <h5/>
+        <Logo />
+        <h5 />
         <span>I make organized and intuitive<br />user experiences.</span>
         <TableOfContents />
       </div>

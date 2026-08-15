@@ -27,6 +27,8 @@
 
   color-scheme: dark;
   --color-accent: #52106B;
+  --color-accent-deeper: #3C106B;
+  --color-accent-deepest: #06133C;
   --color-text-accent: #e0aefb;
   --color-background: #131d3c;
   --color-background-1: #111729;

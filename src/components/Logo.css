@@ -9,6 +9,9 @@
   width: 100%;
   height: auto;
   overflow: visible;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .logo-text {

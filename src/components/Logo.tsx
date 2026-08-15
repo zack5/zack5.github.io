@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Logo.css';
+import eyeSquint from '../assets/name-animation/eye-squint.svg';
 
 interface Position {
     x: number;
@@ -76,7 +77,9 @@ export default function Logo() {
 
     useEffect(() => {
         const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-       const target = isMouseNear ? mouse : FACE;
+        const target = isMouseDown
+            ? { x: FACE.x, y: FACE.y + EYE_HEIGHT * 2 }
+            : isMouseNear ? mouse : FACE;
 
         const animate = () => {
             setMouseAnimated(prev => {
@@ -98,7 +101,7 @@ export default function Logo() {
         return () => {
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
         };
-    }, [mouse, isMouseNear]);
+    }, [mouse, isMouseNear, isMouseDown]);
 
     useEffect(() => {
         const schedule = () => {
@@ -124,6 +127,7 @@ export default function Logo() {
         };
     }, []);
 
+    const showBlink = isBlinking && !isMouseDown;
     const distanceToMouse = distance(FACE, mouseAnimated);
 
     const offsetToMouseX = mouseAnimated.x - FACE.x;
@@ -131,21 +135,21 @@ export default function Logo() {
     const offsetToMouseY = mouseAnimated.y - FACE.y;
     const eyeOffsetY = Math.sqrt(Math.abs(offsetToMouseY)) * Math.sign(offsetToMouseY);
     
-    const faceEyeSpacing = FACE_EYE_SPACING - Math.sqrt(distanceToMouse) * EYE_SPACING_FACTOR;
+    const faceEyeSpacing = (FACE_EYE_SPACING - Math.sqrt(distanceToMouse) * EYE_SPACING_FACTOR);
     const eyeCenter = { x: eyeOffsetX + FACE.x, y: eyeOffsetY + FACE.y };
     const eyeLeft = {
         x: eyeCenter.x - faceEyeSpacing / 2,
-        y: eyeCenter.y - Math.max(0, FACE.x - eyeCenter.x) * (eyeCenter.y - FACE.y) * 0.02 + (isBlinking ? BLINK_Y_OFFSET : 0)
+        y: eyeCenter.y - Math.max(0, FACE.x - eyeCenter.x) * (eyeCenter.y - FACE.y) * 0.02 + (showBlink ? BLINK_Y_OFFSET : 0)
     };
     const eyeRight = {
         x: eyeCenter.x + faceEyeSpacing / 2, 
-        y: eyeCenter.y - Math.max(0, eyeCenter.x - FACE.x) * (eyeCenter.y - FACE.y) * 0.02 + (isBlinking ? BLINK_Y_OFFSET : 0)
+        y: eyeCenter.y - Math.max(0, eyeCenter.x - FACE.x) * (eyeCenter.y - FACE.y) * 0.02 + (showBlink ? BLINK_Y_OFFSET : 0)
     };
 
     const leftEyeWidth = EYE_WIDTH * (1 - EYE_ROTATION_FACTOR * Math.sqrt(Math.max(FACE.x - eyeLeft.x, 0)));
     const rightEyeWidth = EYE_WIDTH * (1 - EYE_ROTATION_FACTOR * Math.sqrt(Math.max(eyeRight.x - FACE.x, 0)));
-    const leftEyeHeight = (isBlinking || isMouseDown) ? BLINK_HEIGHT : EYE_HEIGHT;
-    const rightEyeHeight = (isBlinking || isMouseDown) ? BLINK_HEIGHT : EYE_HEIGHT;
+    const leftEyeHeight = (showBlink) ? BLINK_HEIGHT : EYE_HEIGHT;
+    const rightEyeHeight = (showBlink) ? BLINK_HEIGHT : EYE_HEIGHT;
 
 
 
@@ -170,25 +174,50 @@ export default function Logo() {
 
                 <circle r="20" cx={FACE.x} cy={FACE.y} fill="var(--color-header)" />
 
-                <rect
-                    x={eyeLeft.x - leftEyeWidth / 2}
-                    y={eyeLeft.y - leftEyeHeight / 2}
-                    width={leftEyeWidth}
-                    height={leftEyeHeight}
-                    rx={EYE_WIDTH / 2}
-                    ry={EYE_WIDTH / 2}
-                    fill="var(--color-accent-deeper)"
-                />
+                {isMouseDown ? (
+                    <>
+                        <image
+                            href={eyeSquint}
+                            x={eyeLeft.x - leftEyeWidth / 2}
+                            y={eyeLeft.y - leftEyeHeight / 2}
+                            width={leftEyeWidth}
+                            height={leftEyeHeight}
+                            preserveAspectRatio="xMidYMid meet"
+                        />
 
-                <rect
-                    x={eyeRight.x - rightEyeWidth / 2}
-                    y={eyeRight.y - rightEyeHeight / 2}
-                    width={rightEyeWidth}
-                    height={rightEyeHeight}
-                    rx={EYE_WIDTH / 2}
-                    ry={EYE_WIDTH / 2}
-                    fill="var(--color-accent-deeper)"
-                />
+                        <image
+                            href={eyeSquint}
+                            x={eyeRight.x - rightEyeWidth / 2}
+                            y={eyeRight.y - rightEyeHeight / 2}
+                            width={rightEyeWidth}
+                            height={rightEyeHeight}
+                            preserveAspectRatio="xMidYMid meet"
+                            transform={`translate(${eyeRight.x} ${eyeRight.y}) scale(-1 1) translate(${-eyeRight.x} ${-eyeRight.y})`}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <rect
+                            x={eyeLeft.x - leftEyeWidth / 2}
+                            y={eyeLeft.y - leftEyeHeight / 2}
+                            width={leftEyeWidth}
+                            height={leftEyeHeight}
+                            rx={EYE_WIDTH / 2}
+                            ry={EYE_WIDTH / 2}
+                            fill="var(--color-accent-deeper)"
+                        />
+
+                        <rect
+                            x={eyeRight.x - rightEyeWidth / 2}
+                            y={eyeRight.y - rightEyeHeight / 2}
+                            width={rightEyeWidth}
+                            height={rightEyeHeight}
+                            rx={EYE_WIDTH / 2}
+                            ry={EYE_WIDTH / 2}
+                            fill="var(--color-accent-deeper)"
+                        />
+                    </>
+                )}
             </svg>
         </Link>
     );

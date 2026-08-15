@@ -110,6 +110,10 @@ html, body, #root {
   min-height: 100vh;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 a {
   color: var(--color-header);
   text-decoration: inherit;

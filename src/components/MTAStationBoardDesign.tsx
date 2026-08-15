@@ -19,7 +19,7 @@ export default function MTAStationBoardDesign() {
         I love getting around the city on public transit, but I don't love narrowly missing trains. It's always been a dream of mine to have a station board permanently in my own apartment to optimize my trips.
       </p>
 
-      <section id="Paper Prototypes" data-toc-title="Paper Prototypes">
+      <section id="PaperPrototypes" data-toc-title="Paper Prototypes">
         <h2 className="portfolio-subheading">Paper Prototypes</h2>
         <p>
           Some quick coardboard cutouts helped validate that I was designing for the correct size for the space.
@@ -39,7 +39,7 @@ export default function MTAStationBoardDesign() {
         </figure>
       </section>
 
-      <section id="Figma Prototypes" data-toc-title="Figma Prototypes">
+      <section id="FigmaPrototypes" data-toc-title="Figma Prototypes">
         <h2 className="portfolio-subheading">Figma Prototypes</h2>
         <figure className="portfolio-images">
           <img src={Figma1} className="no-bottom-margin portfolio-image-capped-2" />
@@ -72,7 +72,7 @@ export default function MTAStationBoardDesign() {
         </p>
       </section>
 
-      <section id="Mobile Exploration" data-toc-title="Mobile Exploration">
+      <section id="MobileExploration" data-toc-title="Mobile Exploration">
         <h2 className="portfolio-subheading">Mobile Exploration</h2>
         <p>
           While developping the app for the display, I found myself actually using it while riding the subway at times when a station board wasn't within view. This inspired me to iterate more on a layout optimized for mobile.

@@ -34,7 +34,7 @@ export default function Main() {
         />
         <EventExperience
           title="Santa Monica Studio - Intern"
-          description={<p>Collaborated with designers and artists to implement HUD and menu elements for <i>God of War: Ragnarok</i>.</p>}
+          description={<span>Collaborated with designers and artists to implement HUD and menu elements for <i>God of War: Ragnarok</i>.</span>}
           duration="2019"
           skills={["C++", "Lua"]}
           href="https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa"

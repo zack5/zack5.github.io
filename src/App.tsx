@@ -12,8 +12,13 @@ function App() {
 
   return (
     <>
-      <div className="background"/>
-      <HashRouter>
+      <div className="background" />
+      <HashRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Main />} />

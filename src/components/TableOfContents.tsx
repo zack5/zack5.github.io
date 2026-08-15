@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
@@ -14,6 +14,7 @@ export default function TableOfContents() {
     const navRef = useRef<HTMLElement | null>(null);
     const indicatorRef = useRef<HTMLDivElement | null>(null);
     const manualScrollLockRef = useRef<number | null>(null);
+    const initialScrollRef = useRef<boolean>(true);
     const [indicatorTop, setIndicatorTop] = useState(0);
     const location = useLocation();
     const [sections, setSections] = useState<Array<{ id: string; title: string }>>([]);
@@ -27,8 +28,11 @@ export default function TableOfContents() {
     };
 
     const getRouteAwareHash = (id: string) => {
-        const routePath = location.pathname === "/" ? "" : location.pathname;
-        return routePath ? `#${routePath}#${id}` : `#${id}`;
+        if (location.pathname === "/") {
+            return `/#/#${id}`;
+        }
+
+        return `#${location.pathname}#${id}`;
     };
 
     useEffect(() => {
@@ -50,7 +54,6 @@ export default function TableOfContents() {
             // observer updates until the lock times out so the clicked entry
             // becomes active immediately instead of ticking through others.
             if (manualScrollLockRef.current != null) return;
-
             setActiveId(best.target.id || null);
         };
 
@@ -109,15 +112,20 @@ export default function TableOfContents() {
     useEffect(() => {
         const scrollToHash = (hash: string) => {
             const id = getHashTargetId(hash);
-            if (!id) return;
+            if (!id || id[0] === '/') return;
             const el = document.getElementById(id);
             if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+
             setActiveId(id);
         };
 
         // initial load: if there's a hash in location, scroll to it
         const currentHash = location?.hash || window.location.hash;
-        if (currentHash) scrollToHash(currentHash);
+        if (initialScrollRef.current)
+        {
+            initialScrollRef.current = false;
+            if (currentHash) scrollToHash(currentHash);
+        }
 
         const onHashChange = () => scrollToHash(window.location.hash);
         const onPopState = () => scrollToHash(window.location.hash || location.hash);
@@ -144,12 +152,6 @@ export default function TableOfContents() {
             }, 700);
 
             el.scrollIntoView({ behavior: "smooth", block: "start" });
-            const targetHash = getRouteAwareHash(id);
-            try {
-                window.history.pushState(null, "", targetHash);
-            } catch (err) {
-                window.location.hash = targetHash;
-            }
             setActiveId(id || null);
         }
     };
@@ -179,13 +181,14 @@ export default function TableOfContents() {
                                 whileHover={{ x: 3 }}
                                 transition={{ duration: 0.2, ease: "easeInOut" }}
                             >
-                                <a
-                                    href={getRouteAwareHash(s.id)}
-                                    className={s.id === activeId ? "active" : ""}
-                                    onClick={(e) => handleClick(e, s.id)}
-                                >
-                                    <h4>{s.title}</h4>
-                                </a>
+                                <Link
+  to={getRouteAwareHash(s.id)}
+  replace
+  className={s.id === activeId ? "active" : ""}
+  onClick={(e : React.MouseEvent) => handleClick(e, s.id)}
+>
+  <h4>{s.title}</h4>
+</Link>
                             </motion.li>
                         );
                     })}

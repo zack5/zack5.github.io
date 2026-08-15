@@ -86,10 +86,45 @@ export default function TableOfContents() {
         return () => window.removeEventListener("resize", update);
     }, [sections.length, activeId]);
 
+    // Scroll to section when the URL hash changes (or on history navigation)
+    useEffect(() => {
+        const scrollToHash = (hash: string) => {
+            const id = hash?.replace(/^#/, "");
+            if (!id) return;
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+            setActiveId(id);
+        };
+
+        // initial load: if there's a hash in location, scroll to it
+        const currentHash = location?.hash || window.location.hash;
+        if (currentHash) scrollToHash(currentHash);
+
+        const onHashChange = () => scrollToHash(window.location.hash);
+        const onPopState = () => scrollToHash(window.location.hash || location.hash);
+
+        window.addEventListener("hashchange", onHashChange);
+        window.addEventListener("popstate", onPopState);
+        return () => {
+            window.removeEventListener("hashchange", onHashChange);
+            window.removeEventListener("popstate", onPopState);
+        };
+    }, [sections, location]);
+
     const handleClick = (e: React.MouseEvent, id?: string) => {
         e.preventDefault();
         const el = id ? document.getElementById(id) : null;
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+            try {
+                // Update the URL hash without triggering a hashchange event
+                window.history.pushState(null, "", `/#/#${id}`);
+            } catch (err) {
+                // fallback
+                window.location.hash = `#${id}`;
+            }
+            setActiveId(id || null);
+        }
     };
 
     if (!sections.length) return null;

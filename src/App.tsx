@@ -3,7 +3,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 
 import Fortnite from './components/Fortnite'
-import Gradient from './components/Gradient'
+// import Gradient from './components/Gradient'
 import Layout from './components/Layout'
 import Main from './components/Main'
 import MTAStationBoardDesign from './components/MTAStationBoardDesign'

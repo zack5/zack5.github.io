@@ -28,6 +28,8 @@ export default function Logo() {
     const MOUSE_TRACKING_SPEED = 0.05; // .12 is reasonably snappy
     const MOUSE_LEAVE_DELAY_MS = 1300; // delay before considering the mouse "away"
 
+    const EYE_SMOOTH_K = 6; // transition width (px) for smoothing sqrt near zero
+
     const IDLE_RANDOM_MIN_SEC = 4; // min seconds before picking a random idle target
     const IDLE_RANDOM_MAX_SEC = 16; // max seconds before picking a random idle target
 
@@ -191,9 +193,22 @@ export default function Logo() {
     const distanceToMouse = distance(FACE, mouseAnimated);
 
     const offsetToMouseX = mouseAnimated.x - FACE.x;
-    const eyeOffsetX = Math.sqrt(Math.abs(offsetToMouseX)) * Math.sign(offsetToMouseX) * 1.45;
     const offsetToMouseY = mouseAnimated.y - FACE.y;
-    const eyeOffsetY = Math.sqrt(Math.abs(offsetToMouseY)) * Math.sign(offsetToMouseY);
+
+    const smoothSignedSqrt = (x: number, k = EYE_SMOOTH_K): number => {
+        const s = Math.sign(x) || 1;
+        const a = Math.abs(x);
+        if (a >= k) return s * Math.sqrt(a);
+        const linearSlope = 1 / (2 * Math.sqrt(k));
+        const linear = a * linearSlope;
+        const t = a / k;
+        const blend = t * t * (3 - 2 * t); // smoothstep
+        const result = (1 - blend) * linear + blend * Math.sqrt(a);
+        return s * result;
+    };
+
+    const eyeOffsetX = smoothSignedSqrt(offsetToMouseX, EYE_SMOOTH_K) * 1.45;
+    const eyeOffsetY = smoothSignedSqrt(offsetToMouseY, EYE_SMOOTH_K);
 
     const faceEyeSpacing = (FACE_EYE_SPACING - Math.sqrt(distanceToMouse) * EYE_SPACING_FACTOR);
     const eyeCenter = { x: eyeOffsetX + FACE.x, y: eyeOffsetY + FACE.y };

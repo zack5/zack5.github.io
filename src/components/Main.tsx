@@ -79,6 +79,7 @@ export default function Main() {
           href="https://lettergrams.netlify.app/"
         />
       </section >
+      
     </>
   )
 }

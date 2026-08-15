@@ -17,12 +17,13 @@ export default function Logo() {
 
     const FACE = { x: 206.5, y: 87 };
     const FACE_EYE_SPACING = 26;
-    const EYE_WIDTH = 8;
+    const EYE_WIDTH = 9;
     const EYE_HEIGHT = 15;
 
     const EYE_ROTATION_FACTOR = 0.04 // 0 = no scaling 0.1 = too much, 
     const EYE_SPACING_FACTOR = 0.6; // how much the eyes move apart as the mouse moves away
     const MOUSE_TRACKING_SPEED = 0.05; // .12 is reasonably snappy
+    const MOUSE_LEAVE_DELAY_MS = 1300; // delay before considering the mouse "away"
 
     const BLINK_MIN_INTERVAL_SEC = 2; // minimum seconds between blinks
     const BLINK_MAX_INTERVAL_SEC = 8; // maximum seconds between blinks
@@ -33,7 +34,9 @@ export default function Logo() {
     const svgRef = useRef<SVGSVGElement | null>(null);
     const blinkTimeoutRef = useRef<number | null>(null);
     const nextBlinkTimeoutRef = useRef<number | null>(null);
+    const mouseLeaveTimeoutRef = useRef<number | null>(null);
     const [isMouseNear, setIsMouseNear] = useState(false);
+    const [isMouseDown, setIsMouseDown] = useState(false);
     const [isBlinking, setIsBlinking] = useState(false);
     const [mouse, setMouse] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
     const [mouseAnimated, setMouseAnimated] = useState<{ x: number; y: number }>({ x: FACE.x, y: FACE.y });
@@ -56,6 +59,19 @@ export default function Logo() {
                 y: transformedPoint.y,
             });
         }
+    };
+
+    const handleMouseEnter = () => {
+        if (mouseLeaveTimeoutRef.current) {
+            clearTimeout(mouseLeaveTimeoutRef.current);
+            mouseLeaveTimeoutRef.current = null;
+        }
+        setIsMouseNear(true);
+    };
+
+    const handleMouseLeave = () => {
+        if (mouseLeaveTimeoutRef.current) clearTimeout(mouseLeaveTimeoutRef.current);
+        mouseLeaveTimeoutRef.current = window.setTimeout(() => setIsMouseNear(false), MOUSE_LEAVE_DELAY_MS);
     };
 
     useEffect(() => {
@@ -104,6 +120,7 @@ export default function Logo() {
         return () => {
             if (nextBlinkTimeoutRef.current) clearTimeout(nextBlinkTimeoutRef.current);
             if (blinkTimeoutRef.current) clearTimeout(blinkTimeoutRef.current);
+            if (mouseLeaveTimeoutRef.current) clearTimeout(mouseLeaveTimeoutRef.current);
         };
     }, []);
 
@@ -127,8 +144,8 @@ export default function Logo() {
 
     const leftEyeWidth = EYE_WIDTH * (1 - EYE_ROTATION_FACTOR * Math.sqrt(Math.max(FACE.x - eyeLeft.x, 0)));
     const rightEyeWidth = EYE_WIDTH * (1 - EYE_ROTATION_FACTOR * Math.sqrt(Math.max(eyeRight.x - FACE.x, 0)));
-    const leftEyeHeight = isBlinking ? BLINK_HEIGHT : EYE_HEIGHT;
-    const rightEyeHeight = isBlinking ? BLINK_HEIGHT : EYE_HEIGHT;
+    const leftEyeHeight = (isBlinking || isMouseDown) ? BLINK_HEIGHT : EYE_HEIGHT;
+    const rightEyeHeight = (isBlinking || isMouseDown) ? BLINK_HEIGHT : EYE_HEIGHT;
 
 
 
@@ -138,8 +155,10 @@ export default function Logo() {
                 ref={svgRef}
                 viewBox={`0 0 ${VIEW_BOX_WIDTH} ${VIEW_BOX_HEIGHT}`}
                 onMouseMove={handleMouseMove}
-                onMouseEnter={() => setIsMouseNear(true)}
-                onMouseLeave={() => setIsMouseNear(false)}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onMouseDown={() => setIsMouseDown(true)}
+                onMouseUp={() => setIsMouseDown(false)}
                 className="logo-svg"
             >
                 <text x={0} y={0} className="logo-text">
@@ -156,8 +175,8 @@ export default function Logo() {
                     y={eyeLeft.y - leftEyeHeight / 2}
                     width={leftEyeWidth}
                     height={leftEyeHeight}
-                    rx="4"
-                    ry="4"
+                    rx={EYE_WIDTH / 2}
+                    ry={EYE_WIDTH / 2}
                     fill="var(--color-accent-deeper)"
                 />
 
@@ -166,8 +185,8 @@ export default function Logo() {
                     y={eyeRight.y - rightEyeHeight / 2}
                     width={rightEyeWidth}
                     height={rightEyeHeight}
-                    rx="4"
-                    ry="4"
+                    rx={EYE_WIDTH / 2}
+                    ry={EYE_WIDTH / 2}
                     fill="var(--color-accent-deeper)"
                 />
             </svg>

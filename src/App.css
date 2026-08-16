@@ -40,6 +40,10 @@ section > :first-child {
   margin-top: 0;
 }
 
+.section-link {
+  margin-top: -1.25rem;
+}
+
 /* Sidebar */
 
 .sidebar {

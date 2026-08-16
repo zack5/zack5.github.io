@@ -39,7 +39,7 @@ export default function Main() {
           skills={["C++", "Lua"]}
           href="https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa"
         />
-        <a href="/Zack Cinquini 2025.pdf" aria-label="Download resume (PDF)" target="_blank" rel="noopener noreferrer">View Resume<GoArrowUpRight className="link-arrow"/></a>
+        <a className="section-link" href="/Zack Cinquini 2025.pdf" aria-label="Download resume (PDF)" target="_blank" rel="noopener noreferrer">View Resume<GoArrowUpRight className="link-arrow"/></a>
       </section>
       <section id="projects" data-toc-title="Projects" className="events">
         <h3>Projects</h3>

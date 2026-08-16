@@ -28,7 +28,9 @@ export default function Logo() {
     const MOUSE_TRACKING_SPEED = 0.05; // .12 is reasonably snappy
     const MOUSE_LEAVE_DELAY_MS = 1300; // delay before considering the mouse "away"
 
-    const EYE_SMOOTH_K = 6; // transition width (px) for smoothing sqrt near zero
+    const DEPTH = 60; // projection depth (px) for spherical mapping, larget = more linear
+    const SCALE_X = 20.0;
+    const SCALE_Y = 18.0;
 
     const IDLE_RANDOM_MIN_SEC = 4; // min seconds before picking a random idle target
     const IDLE_RANDOM_MAX_SEC = 16; // max seconds before picking a random idle target
@@ -195,20 +197,12 @@ export default function Logo() {
     const offsetToMouseX = mouseAnimated.x - FACE.x;
     const offsetToMouseY = mouseAnimated.y - FACE.y;
 
-    const smoothSignedSqrt = (x: number, k = EYE_SMOOTH_K): number => {
-        const s = Math.sign(x) || 1;
-        const a = Math.abs(x);
-        if (a >= k) return s * Math.sqrt(a);
-        const linearSlope = 1 / (2 * Math.sqrt(k));
-        const linear = a * linearSlope;
-        const t = a / k;
-        const blend = t * t * (3 - 2 * t); // smoothstep
-        const result = (1 - blend) * linear + blend * Math.sqrt(a);
-        return s * result;
+    const sphericalMap = (x: number, k = DEPTH): number => {
+        return x / Math.sqrt(x * x + k * k);
     };
 
-    const eyeOffsetX = smoothSignedSqrt(offsetToMouseX, EYE_SMOOTH_K) * 1.45;
-    const eyeOffsetY = smoothSignedSqrt(offsetToMouseY, EYE_SMOOTH_K);
+    const eyeOffsetX = sphericalMap(offsetToMouseX, DEPTH) * SCALE_X;
+    const eyeOffsetY = sphericalMap(offsetToMouseY, DEPTH) * SCALE_Y;
 
     const faceEyeSpacing = (FACE_EYE_SPACING - Math.sqrt(distanceToMouse) * EYE_SPACING_FACTOR);
     const eyeCenter = { x: eyeOffsetX + FACE.x, y: eyeOffsetY + FACE.y };

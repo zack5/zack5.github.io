@@ -19,22 +19,22 @@ export default function Main() {
       <section id="experience" data-toc-title="Experience" className="events">
         <h3>Experience</h3>
         <EventExperience
-          title="Epic Games - UI Engineer"
+          title="Epic Games"
           description="UI Engineer on the Fortnite Ecosystem Experience team."
           duration="2025—Present"
           skills={["C++", "Unreal"]}
           to="Fortnite"
         />
         <EventExperience
-          title="Ubisoft - UI Engineer"
+          title="Ubisoft"
           description={<span>Main point of contact for UI Engineering on <i>XDefiant</i>. Owned frontend state management, 3D characters within menus, and progression systems UI. First responder to live issues.</span>}
           duration="2020—2025"
           skills={["C++", "Snowdrop"]}
           to="XDefiant"
         />
         <EventExperience
-          title="Santa Monica Studio - Intern"
-          description={<span>Collaborated with designers and artists to implement HUD and menu elements for <i>God of War: Ragnarok</i>.</span>}
+          title="Santa Monica Studio"
+          description={<span>Collaborated with designers and artists to implement HUD and menu elements as an intern on <i>God of War: Ragnarok</i>.</span>}
           duration="2019"
           skills={["C++", "Lua"]}
           href="https://youtu.be/fERuzCJuuaA?si=tXIM1V63RejpnJVa"

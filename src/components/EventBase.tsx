@@ -30,7 +30,7 @@ export default function EventBase({ title, description, thumbnailWidget, skills,
         <header className="event-title">
           <h2 id={`event-${title.toLowerCase().replace(/\s+/g, '-')}`}>
             {title}
-            {href ? <GoArrowUpRight className="link-arrow" /> : <IoChatbubbleEllipsesOutline className="link-arrow link-more-info" />}
+            {href ? <GoArrowUpRight className="link-icon link-arrow" /> : <IoChatbubbleEllipsesOutline className="link-icon link-more-info" />}
           </h2>
         </header>
         {!!description && <p>{description}</p>}

@@ -137,17 +137,22 @@ section h3 {
   }
 }
 
-:is(a, .event-base) .link-arrow {
-  margin-bottom: -0.2rem;
+:is(a, .event-base) .link-icon {
   transition: transform 0.2s ease-in-out;
 }
 
-:is(a, .event-base):hover .link-arrow {
+:is(a, .event-base):hover .link-icon {
   transform: translateX(0.1rem) translateY(-0.1rem);
 }
 
+.link-arrow {
+  margin-bottom: -0.2rem;
+  margin-left: 0.1rem;
+}
+
 .link-more-info {
-  margin-left: 0.2rem;
+  margin-bottom: -0.1rem;
+  margin-left: 0.3rem;
 }
 
 /* About */

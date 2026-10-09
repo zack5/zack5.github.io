@@ -15,7 +15,7 @@ export default function XDefiant() {
         XDefiant is a free-to-play first-person shooter developped by Ubisoft. Its launch in May 2024 drew over <a href="https://gamerant.com/xdefiant-11-million-players/" aria-label="Article about XDefiant reaching 11 Million players">11 Million players</a> in the first two weeks.
       </p>
       <p>
-        I was the main point of contact for UI Engineering on XDefiant. I worked primarily in C++ and Ubisoft's Snowdrop engine to ensure that all UI elements functioned as intended and were optimized for performance on PC and consoles. I led internal workshops on best practices to create modular, scalable systems that maintained our high bar for <a href="https://toronto.ubisoft.com/how-xdefiant-flipped-the-script-to-give-arabic-players-a-tailored-experience/" aria-label="Article about XDefiant's Arabic localization and accesibility">accesibility and localization</a>.
+        I was the main point of contact for UI Engineering on XDefiant. I worked primarily in C++ and Ubisoft's Snowdrop engine to ensure that all UI elements functioned as intended and were optimized for performance on PC and consoles. I led internal workshops on best practices to create modular, scalable systems that maintained our high bar for <a href="https://toronto.ubisoft.com/how-xdefiant-flipped-the-script-to-give-arabic-players-a-tailored-experience/" aria-label="Article about XDefiant's Arabic localization and accessibility">accessibility and localization</a>.
       </p>
       <p>
         My primary areas of ownership were frontend state management, 3D asset display, and UI for progression systems. I was also a first responder for urgent live UI issues.

@@ -131,6 +131,10 @@ section {
   scroll-margin: 3rem; 
 }
 
+section h2 {
+  margin-bottom: 0.35rem
+}
+
 section h3 {
   display: none;
 }
@@ -159,7 +163,6 @@ section h3 {
   margin-left: 0.3rem;
 }
 
-/* About */
 .about {
   display: flex;
   flex-direction: column;
@@ -213,7 +216,6 @@ section h3 {
   border-radius: 2px;
 }
 
-/* Skills */
 .event-skills {
   display: flex;
   flex-wrap: wrap;
@@ -267,4 +269,8 @@ section h3 {
 
 .no-bottom-margin {
   margin-bottom: 0;
+}
+
+.portfolio-images .react-tweet-theme {
+  margin-top: 0;
 }
